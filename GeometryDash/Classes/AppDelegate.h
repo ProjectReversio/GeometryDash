@@ -14,24 +14,38 @@ public:
     AppDelegate();
     virtual ~AppDelegate();
 
+    static AppDelegate* get()
+    {
+        return static_cast<AppDelegate*>(sharedApplication());
+    }
+
     /**
     @brief    Implement CCDirector and CCScene init code here.
     @return true    Initialize success, app continue.
     @return false   Initialize failed, app terminate.
     */
-    virtual bool applicationDidFinishLaunching();
+    virtual bool applicationDidFinishLaunching() override;
 
     /**
     @brief  The function be called when the application enter background
     @param  the pointer of the application
     */
-    virtual void applicationDidEnterBackground();
+    virtual void applicationDidEnterBackground() override;
 
     /**
     @brief  The function be called when the application enter foreground
     @param  the pointer of the application
     */
-    virtual void applicationWillEnterForeground();
+    virtual void applicationWillEnterForeground() override;
+
+    virtual void setupGLView();
+
+    float bgScale();
+
+private:
+    bool mInitializedGLView;
+    bool mLowMemoryDevice;
+    bool mUnknown2;
 };
 
 #endif // _APP_DELEGATE_H_

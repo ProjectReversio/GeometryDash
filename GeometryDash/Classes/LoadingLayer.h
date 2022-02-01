@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+class TextArea;
+
 class LoadingLayer : public cocos2d::CCLayer
 {
 public:
@@ -23,7 +25,7 @@ public:
 private:
     bool mDontUseRandomText = false;
     cocos2d::CCLabelBMFont* mLoadingTextLabel;
-    //TextArea* mLoadingTextArea; // TODO: TextArea is missing!
+    TextArea* mLoadingTextArea;
     cocos2d::CCSprite* mSliderBar;
 };
 

@@ -2,6 +2,7 @@
 
 #include "AppDelegate.h"
 #include "GameManager.h"
+#include "TextArea.h"
 #include "gameConfig.h"
 
 USING_NS_CC;
@@ -87,13 +88,12 @@ bool LoadingLayer::init()
     const CCPoint loadingTextPos(winSize.width * 0.5f, winSize.height * 0.5f - 70.0f);
     mLoadingTextLabel->setPosition(loadingTextPos);
     mLoadingTextLabel->setScale(0.7f);
-    //mLoadingTextLabel->setVisible(false);
+    mLoadingTextLabel->setVisible(false);
 
-    // TODO: TextArea is missing!
-    /*mLoadingTextArea = TextArea::create("goldFont.fnt", 1.0f, 440.0f, CCPoint(0.5f, 0.5f), 28.0f, false);
+    mLoadingTextArea = TextArea::create(getLoadingString(), "goldFont.fnt", 1.0f, 440.0f, CCPoint(0.5f, 0.5f), 28.0f, false);
     this->addChild(mLoadingTextArea);
     mLoadingTextArea->setPosition(CCPoint(winSize.width * 0.5f, winSize.height * 0.5f - 100.0f));
-    mLoadingTextArea->setScale(0.7f);*/
+    mLoadingTextArea->setScale(0.7f);
 
     if (mLoadingTextLabel->getContentSize().width > 300.0f)
     {
@@ -124,9 +124,8 @@ bool LoadingLayer::init()
     sliderGroove->addChild(mSliderBar);
     mSliderBar->setAnchorPoint(CCPoint(0.0f, 0.0f));
     mSliderBar->setPosition(CCPoint(2.0f, 4.0f));
-    // TODO: Missing TextArea!
-    //sliderGroove->setPosition(CCPoint(mLoadingTextLabel->getPosition().x, mLoadingTextArea->getPosition().y + 40.0f));
-    sliderGroove->setPosition(CCPoint(mLoadingTextLabel->getPosition().x, mLoadingTextLabel->getPosition().y + 40.0f));
+    
+    sliderGroove->setPosition(CCPoint(mLoadingTextLabel->getPosition().x, mLoadingTextArea->getPosition().y + 40.0f));
 
     this->updateProgress(0);
 

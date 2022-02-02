@@ -66,17 +66,17 @@ bool LoadingLayer::init()
 
 #if defined(GD_SUBZERO)
     CCSprite* subZeroLogo = CCSprite::createWithSpriteFrameName("gj_subzeroLogo_001.png");
-    this->addChild(subZeroLogo);
+    this->addChild(subZeroLogo, 2);
     const CCPoint logoPos3(140.0f, -46.0f);
     subZeroLogo->setPosition(logoPos3 + gjLogoPos);
 #elif defined(GD_MELTDOWN)
     CCSprite* subZeroLogo = CCSprite::createWithSpriteFrameName("GJ_md_001.png");
-    this->addChild(subZeroLogo);
+    this->addChild(subZeroLogo, 2);
     const CCPoint logoPos3(140.0f, -46.0f);
     subZeroLogo->setPosition(logoPos3 + gjLogoPos);
 #elif defined(GD_WORLD)
     CCSprite* subZeroLogo = CCSprite::createWithSpriteFrameName("gj_worldLogo_001.png");
-    this->addChild(subZeroLogo);
+    this->addChild(subZeroLogo, 2);
     const CCPoint logoPos3(120.0f, -46.0f);
     subZeroLogo->setPosition(logoPos3 + gjLogoPos);
 #endif
@@ -112,7 +112,7 @@ bool LoadingLayer::init()
     mLoadingTextLabel->setScale(textScale);
 
     CCSprite* sliderGroove = CCSprite::create("slidergroove.png");
-    this->addChild(sliderGroove);
+    this->addChild(sliderGroove, 3);
 
     mSliderBar = CCSprite::create("sliderBar.png");
     // TODO: Stuff goes here
@@ -121,7 +121,7 @@ bool LoadingLayer::init()
     ccTexParams params { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT };
     tex->setTexParameters(&params);
 
-    sliderGroove->addChild(mSliderBar);
+    sliderGroove->addChild(mSliderBar, -1);
     mSliderBar->setAnchorPoint(CCPoint(0.0f, 0.0f));
     mSliderBar->setPosition(CCPoint(2.0f, 4.0f));
     

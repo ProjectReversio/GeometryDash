@@ -5,6 +5,7 @@
 
 class GameManager : public cocos2d::CCNode
 {
+    friend class AppDelegate;
 public:
     GameManager();
     virtual ~GameManager();
@@ -20,6 +21,7 @@ public:
 
 private:
     int mCurrentBackground;
+    bool mUseLowQualityTextures;
 };
 
 #endif // __GAMEMANAGER_H__

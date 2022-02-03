@@ -1,4 +1,6 @@
 #include "AppDelegate.h"
+
+#include "GameManager.h"
 #include "LoadingLayer.h"
 
 USING_NS_CC;
@@ -26,6 +28,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     this->setupGLView();
     pDirector->setProjection(kCCDirectorProjection2D);
+
+    // TODO: Stuff goes here
+
+    mLowQualityTextures = false;
+    CCTexture2D::setDefaultAlphaPixelFormat(kCCTexture2DPixelFormat_RGBA4444);
+    CCTexture2D::PVRImagesHavePremultipliedAlpha(true);
+    pDirector->setDepthTest(false);
+    
+    // TODO: Stuff goes here
 	
     // turn on display FPS
     pDirector->setDisplayStats(true);
@@ -48,7 +59,7 @@ void AppDelegate::setupGLView()
     {
         mInitializedGLView = true;
 
-        CCSize size(480.0f, 320.0f);
+        CCSize contentSize(480.0f, 320.0f);
 
         CCFileUtils* pFileUtils = CCFileUtils::sharedFileUtils();
         pFileUtils->addSearchPath("Resources");
@@ -58,27 +69,31 @@ void AppDelegate::setupGLView()
         pDirector->setOpenGLView(pEGLView);
 
         pEGLView->setViewName("Geometry Dash");
-
-        //CCSize windowSize(640.0f, 480.0f);
-        CCSize windowSize = pEGLView->getFrameSize();
+        
+        const CCSize windowSize = pEGLView->getFrameSize();
         this->mUnknown2 = (-windowSize.width == 2436.0f) & 1; // TODO: What is this about?
         pEGLView->setFrameSize(windowSize.width, windowSize.height);
 
         // TODO: PlatformToolbox is missing
         //this->mLowMemoryDevice = PlatformToolbox::isLowMemoryDevice();
-
-        // TODO: Missing setupScreenScale
-        //pDirector->setupScreenScale(size, windowSize, this->mLowMemoryDevice);
+        
+        pDirector->setupScreenScale(contentSize, windowSize, this->mLowMemoryDevice ? TextureQuality::LowQuality : TextureQuality::HighQuality);
     }
 }
 
 float AppDelegate::bgScale()
 {
     CCDirector* pDirector = CCDirector::sharedDirector();
-    //float scaleFactor = pDirector->getScreenScaleFactorMax();
+    float scaleFactor = pDirector->getScreenScaleFactorMax();
 
-    // TODO: implement properly
-    return 1.0f;
+    GameManager* pGameManager = GameManager::sharedState();
+    
+    if (mLowQualityTextures || pGameManager->mUseLowQualityTextures)
+    {
+        return scaleFactor * pDirector->getContentScaleFactor();
+    }
+
+    return scaleFactor;
 }
 
 

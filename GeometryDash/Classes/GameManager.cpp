@@ -1,10 +1,12 @@
 #include "GameManager.h"
 
+#include "AppDelegate.h"
+
 USING_NS_CC;
 
 GameManager::GameManager()
 {
-    
+    mUseLowQualityTextures = false;
 }
 
 GameManager::~GameManager()
@@ -57,10 +59,13 @@ void GameManager::loadBackground(int index)
         }
 
         CCString* s = CCString::createWithFormat("game_bg_%02d_001.png", num);
+        
+        AppDelegate* pApp = AppDelegate::get();
+        bool useLQTextures = true;
+        if (!pApp->mLowQualityTextures)
+            useLQTextures = mUseLowQualityTextures;
 
-        // TODO: Implement Unknown Stuff
-
-        pTextureCache->addImage(s->getCString());
+        pTextureCache->addImage(s->getCString(), useLQTextures);
 
         mCurrentBackground = num;
     }

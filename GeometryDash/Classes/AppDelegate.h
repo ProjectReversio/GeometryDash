@@ -10,6 +10,7 @@ The reason for implement as private inheritance is to hide some interface call b
 */
 class  AppDelegate : private cocos2d::CCApplication
 {
+    friend class GameManager;
 public:
     AppDelegate();
     virtual ~AppDelegate();
@@ -45,6 +46,7 @@ public:
 private:
     bool mInitializedGLView;
     bool mLowMemoryDevice;
+    bool mLowQualityTextures;
     bool mUnknown2;
 };
 

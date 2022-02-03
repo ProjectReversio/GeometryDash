@@ -115,7 +115,7 @@ bool LoadingLayer::init()
     this->addChild(sliderGroove, 3);
 
     mSliderBar = CCSprite::create("sliderBar.png");
-    // TODO: Stuff goes here
+    mProgressBarSize = CCSize(sliderGroove->getTextureRect().size.width - 4.0f, 8.0f);
 
     CCTexture2D* tex = mSliderBar->getTexture();
     ccTexParams params { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT };
@@ -145,7 +145,11 @@ bool LoadingLayer::init()
 
 void LoadingLayer::updateProgress(int progress)
 {
+    float width = mProgressBarSize.width;
+    if (width > (width * static_cast<float>(progress) / 100.0f))
+        width = width * static_cast<float>(progress) / 100.0f;
 
+    mSliderBar->setTextureRect(CCRect(0.0f, 0.0f, width, mProgressBarSize.height));
 }
 
 void LoadingLayer::loadAssets()

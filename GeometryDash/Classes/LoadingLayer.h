@@ -27,6 +27,7 @@ private:
     cocos2d::CCLabelBMFont* mLoadingTextLabel;
     TextArea* mLoadingTextArea;
     cocos2d::CCSprite* mSliderBar;
+    cocos2d::CCSize mProgressBarSize;
 };
 
 #endif // __LOADINGLAYER_H__

@@ -7,13 +7,13 @@
 
 USING_NS_CC;
 
-CCScene* LoadingLayer::scene()
+CCScene* LoadingLayer::scene(bool reload)
 {
     // 'scene' is an autorelease object
     CCScene* scene = CCScene::create();
 
     // 'layer' is an autorelease object
-    LoadingLayer* layer = LoadingLayer::create();
+    LoadingLayer* layer = LoadingLayer::create(reload);
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -22,14 +22,36 @@ CCScene* LoadingLayer::scene()
     return scene;
 }
 
+LoadingLayer* LoadingLayer::create(bool reload)
+{
+    LoadingLayer* pRet = new LoadingLayer();
+    if (pRet && pRet->init(reload))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+}
+
 // on "init" you need to initialize your instance
-bool LoadingLayer::init()
+bool LoadingLayer::init(bool reload)
 {
     //////////////////////////////
     // 1. super init first
     if (!CCLayer::init())
     {
         return false;
+    }
+
+    mReload = reload;
+    if (!mReload)
+    {
+        // TODO: Stuff goes here.
     }
 
     // TODO: Stuff goes here.
@@ -135,7 +157,7 @@ bool LoadingLayer::init()
     CCSequence* sequence = CCSequence::create(delayTime, callFunc, nullptr);
     pActionManager->addAction(sequence, this, false);
 
-    if (!mDontUseRandomText)
+    if (!mReload)
     {
         // TODO: Stuff goes here
     }
@@ -159,7 +181,7 @@ void LoadingLayer::loadAssets()
 
 const char* LoadingLayer::getLoadingString()
 {
-    if (mDontUseRandomText)
+    if (mReload)
         return "Loading resources";
 
     switch (rand() % 60)

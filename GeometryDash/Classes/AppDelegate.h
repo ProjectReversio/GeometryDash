@@ -20,6 +20,8 @@ public:
         return static_cast<AppDelegate*>(sharedApplication());
     }
 
+    virtual void loadingIsFinished();
+
     /**
     @brief    Implement CCDirector and CCScene init code here.
     @return true    Initialize success, app continue.

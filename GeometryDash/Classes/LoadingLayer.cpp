@@ -38,6 +38,22 @@ LoadingLayer* LoadingLayer::create(bool reload)
     }
 }
 
+LoadingLayer::LoadingLayer()
+{
+    mUnknownBool1 = false;
+    mProgressBarSize = CCSize(0.0f, 0.0f);
+    mStage = 0;
+    mLoadingTextLabel = nullptr;
+    mLoadingTextArea = nullptr;
+    mSliderBar = nullptr;
+    mReload = false;
+}
+
+LoadingLayer::~LoadingLayer()
+{
+    
+}
+
 // on "init" you need to initialize your instance
 bool LoadingLayer::init(bool reload)
 {
@@ -176,7 +192,66 @@ void LoadingLayer::updateProgress(int progress)
 
 void LoadingLayer::loadAssets()
 {
-    
+    CCDirector* pDirector = CCDirector::sharedDirector();
+
+    switch (mStage)
+    {
+    case 0:
+    default:
+        break;
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+        break;
+    case 8:
+        break;
+    case 9:
+        break;
+    case 10:
+        break;
+    case 11:
+        break;
+    case 12:
+        break;
+    case 13:
+        break;
+    case 14:
+        updateProgress(100); // <- not in the original but it makes the progress bar actually render as full
+
+        AppDelegate* pApp = AppDelegate::get();
+        pApp->loadingIsFinished();
+        if (!mReload)
+        {
+            // TODO: Stuff goes here
+        }
+
+        loadingFinished();
+        return;
+    }
+
+    mStage++;
+    mUnknownBool1 = true;
+    updateProgress(mStage * 7);
+    CCActionManager* pActionManager = pDirector->getActionManager();
+    CCDelayTime* delayTime = CCDelayTime::create(0.01f);
+    CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(LoadingLayer::loadAssets));
+    CCSequence* sequence = CCSequence::create(delayTime, callFunc, nullptr);
+    pActionManager->addAction(sequence, this, false);
+}
+
+void LoadingLayer::loadingFinished()
+{
+    // TODO: Implement LoadingLayer::loadingFinished
 }
 
 const char* LoadingLayer::getLoadingString()

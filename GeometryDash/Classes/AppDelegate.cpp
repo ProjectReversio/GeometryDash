@@ -96,6 +96,10 @@ float AppDelegate::bgScale()
     return scaleFactor;
 }
 
+void AppDelegate::loadingIsFinished()
+{
+    // TODO: Implement AppDelegate::loadingIsFinished
+}
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {

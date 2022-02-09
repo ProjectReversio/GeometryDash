@@ -64,13 +64,26 @@ bool LoadingLayer::init(bool reload)
         return false;
     }
 
+    GameManager* pGameManager = GameManager::sharedState();
+
     mReload = reload;
     if (!mReload)
     {
-        // TODO: Stuff goes here.
+        // TODO: Missing GameSoundManager
+        //GameSoundManager* pSoundManager = GameSoundManager::sharedManager();
+        //pSoundManager->setup();
+
+        pGameManager->updateMusic();
     }
 
-    // TODO: Stuff goes here.
+    if (pGameManager->mShouldLoadLevelSaveData)
+    {
+        pGameManager->mShouldLoadLevelSaveData = false;
+
+        // TODO: Missing GameLevelManager
+        //GameLevelManager* pLevelManager = GameLevelManager::sharedState();
+        //pLevelManager->getLevelSaveData();
+    }
 
     CCTextureCache* pTextureCache = CCTextureCache::sharedTextureCache();
     pTextureCache->addImage("GJ_LaunchSheet.png");
@@ -81,7 +94,6 @@ bool LoadingLayer::init(bool reload)
     CCDirector* pDirector = CCDirector::sharedDirector();
     CCSize winSize = pDirector->getWinSize();
 
-    GameManager* pGameManager = GameManager::sharedState();
     const char* bgTextureName = pGameManager->getBGTexture(1);
     CCSprite* bgSprite = CCSprite::create(bgTextureName);
     this->addChild(bgSprite);
@@ -119,7 +131,8 @@ bool LoadingLayer::init(bool reload)
     subZeroLogo->setPosition(logoPos3 + gjLogoPos);
 #endif
 
-    // TODO: Stuff goes here
+    mUnknownBool1 = true;
+    mStage = 0;
     
     mLoadingTextLabel = CCLabelBMFont::create(getLoadingString(), "goldFont.fnt");
     this->addChild(mLoadingTextLabel);
@@ -175,7 +188,11 @@ bool LoadingLayer::init(bool reload)
 
     if (!mReload)
     {
-        // TODO: Stuff goes here
+        if (pGameManager->getGameVariable("0034"))
+        {
+            // TODO: Missing PlatformToolbox
+            //PlatformToolbox::activateGameCenter();
+        }
     }
 
     return true;

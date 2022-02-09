@@ -6,7 +6,12 @@ USING_NS_CC;
 
 GameManager::GameManager()
 {
+    mCurrentBackground = 0;
     mUseLowQualityTextures = false;
+
+    mUnknown1 = false;
+    mUnknown4 = false;
+    mShouldLoadLevelSaveData = false;
 }
 
 GameManager::~GameManager()
@@ -71,9 +76,25 @@ void GameManager::loadBackground(int index)
     }
 }
 
+void GameManager::updateMusic()
+{
+    // TODO: Implement GameManager::updateMusic
+}
+
 void GameManager::fadeInMusic(const char* music)
 {
     // TODO: Implement GameManager::fadeInMusic
+}
+
+void GameManager::setGameVariable(const char* name, bool value)
+{
+    // TODO: Implement GameManager::setGameVariable
+}
+
+bool GameManager::getGameVariable(const char* name)
+{
+    // TODO: Implement GameManager::getGameVariable
+    return false;
 }
 
 void GameManager::syncPlatformAchievements()

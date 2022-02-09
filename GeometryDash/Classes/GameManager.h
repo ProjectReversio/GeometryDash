@@ -14,7 +14,13 @@ public:
 
     const char* getBGTexture(int index);
     void loadBackground(int index);
+
+    void updateMusic();
     void fadeInMusic(const char* music);
+
+    void setGameVariable(const char* name, bool value);
+    bool getGameVariable(const char* name);
+
     void syncPlatformAchievements();
     void tryCacheAd();
 
@@ -29,6 +35,7 @@ private:
 public:
     bool mUnknown1;
     bool mUnknown4;
+    bool mShouldLoadLevelSaveData;
 };
 
 #endif // __GAMEMANAGER_H__

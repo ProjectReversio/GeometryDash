@@ -200,142 +200,170 @@ void LoadingLayer::loadAssets()
 
     switch (mStage)
     {
-    case 0:
-    default:
-    {
-        pTextureCache->addImage("GJ_GameSheet.png");
-        pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet.plist");
-        break;
-    }
-    case 1:
-    {
-        pTextureCache->addImage("GJ_GameSheet02.png");
-        pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet02.plist");
-        break;
-    }
-    case 2:
-    {
-        pTextureCache->addImage("GJ_GameSheet03.png");
-        pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet03.plist");
-        break;
-    }
-    case 3:
-    {
-        pTextureCache->addImage("GJ_GameSheet04.png");
-        pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet04.plist");
-        break;
-    }
-    case 4:
-    {
-        pTextureCache->addImage("GJ_GameSheetGlow.png");
-        pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheetGlow.plist");
-        break;
-    }
-    case 5:
-    {
-        pTextureCache->addImage("FireSheet_01.png");
-        pSpriteFrameCache->addSpriteFramesWithFile("FireSheet_01.plist");
-        pTextureCache->addImage("GJ_ShopSheet.png");
-        pSpriteFrameCache->addSpriteFramesWithFile("GJ_ShopSheet.plist");
-        pTextureCache->addImage("smallDot.png");
-        pTextureCache->addImage("square02_001.png");
-        break;
-    }
-    case 6:
-    {
-        if (pApp->isLowMemoryDevice())
+        case 0:
+        default:
         {
-            pTextureCache->addImage("CCControlColourPickerSpriteSheet.png");
-            pSpriteFrameCache->addSpriteFramesWithFile("CCControlColourPickerSpriteSheet.plist");
+            pTextureCache->addImage("GJ_GameSheet.png");
+            pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet.plist");
+            break;
         }
-
-        CCTexture2DPixelFormat pixFormat = CCTexture2D::defaultAlphaPixelFormat();
-        CCTexture2D::setDefaultAlphaPixelFormat(kCCTexture2DPixelFormat_RGBA8888);
-
-        if (!pApp->isLowMemoryDevice())
+        case 1:
         {
-            pTextureCache->addImage("CCControlColourPickerSpriteSheet.png");
-            pSpriteFrameCache->addSpriteFramesWithFile("CCControlColourPickerSpriteSheet.plist");
+            pTextureCache->addImage("GJ_GameSheet02.png");
+            pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet02.plist");
+            break;
         }
-
-        pTextureCache->addImage("GJ_gradientBG.png");
-        pTextureCache->addImage("edit_barBG_001.png");
-        pTextureCache->addImage("GJ_button_01.png");
-        pTextureCache->addImage("slidergroove2.png");
-        pTextureCache->addImage("sliderBar2.png");
-
-        CCTexture2D::setDefaultAlphaPixelFormat(pixFormat);
-        break;
-    }
-    case 7:
-    {
-        pTextureCache->addImage("GJ_square01.png");
-        pTextureCache->addImage("GJ_square02.png");
-        pTextureCache->addImage("GJ_square03.png");
-        pTextureCache->addImage("GJ_square04.png");
-        pTextureCache->addImage("GJ_square05.png");
-        pTextureCache->addImage("gravityLine_001.png");
-        break;
-    }
-    case 8:
-    {
-        CCLabelBMFont::create(" ", "chatFont.fnt");
-        TextArea::create("temp", "chatFont.fnt", 1.0f, 200.0f, CCPoint(0.0f, 1.0f), 20.0f, false);
-
-        pTextureCache->addImage("goldFont.png");
-        pTextureCache->addImage("bigFont.png");
-
-        CCLabelBMFont::create(" ", "goldFont.fnt");
-        CCLabelBMFont::create(" ", "bigFont.fnt");
-        break;
-    }
-    case 9:
-    {
-        // TODO: Case 9 - Missing ObjectManager
-        break;
-    }
-    case 10:
-    {
-        pTextureCache->addImage("GJ_popup.png");
-        pTextureCache->addImage("GJ_popupMD.png");
-        break;
-    }
-    case 11:
-    {
-        // TODO: Case 11 - Unknown fields
-        break;
-    }
-    case 12:
-    {
-        // TODO: Case 12 - Missing CCTextInputNode
-        break;
-    }
-    case 13:
-    {
-        if (!mReload)
+        case 2:
         {
-            // TODO: Case 13 - Missing CCCircleWave
+            pTextureCache->addImage("GJ_GameSheet03.png");
+            pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet03.plist");
+            break;
         }
-        break;
-    }
-    case 14:
-    {
-        updateProgress(100); // <- not in the original but it makes the progress bar actually render as full
-
-        AppDelegate* pApp = AppDelegate::get();
-        pApp->loadingIsFinished();
-        if (!mReload)
+        case 3:
         {
-            pGameManager->fadeInMusic("menuLoop.mp3");
-            pGameManager->syncPlatformAchievements();
-
-            // TODO: AdToolbox missing - should we even add this anyway?
-            //AdToolbox::cacheInterstitial();
+            pTextureCache->addImage("GJ_GameSheet04.png");
+            pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheet04.plist");
+            break;
         }
+        case 4:
+        {
+            pTextureCache->addImage("GJ_GameSheetGlow.png");
+            pSpriteFrameCache->addSpriteFramesWithFile("GJ_GameSheetGlow.plist");
+            break;
+        }
+        case 5:
+        {
+            pTextureCache->addImage("FireSheet_01.png");
+            pSpriteFrameCache->addSpriteFramesWithFile("FireSheet_01.plist");
+            pTextureCache->addImage("GJ_ShopSheet.png");
+            pSpriteFrameCache->addSpriteFramesWithFile("GJ_ShopSheet.plist");
+            pTextureCache->addImage("smallDot.png");
+            pTextureCache->addImage("square02_001.png");
+            break;
+        }
+        case 6:
+        {
+            if (pApp->isLowMemoryDevice())
+            {
+                pTextureCache->addImage("CCControlColourPickerSpriteSheet.png");
+                pSpriteFrameCache->addSpriteFramesWithFile("CCControlColourPickerSpriteSheet.plist");
+            }
 
-        loadingFinished();
-        return;
-    }
+            CCTexture2DPixelFormat pixFormat = CCTexture2D::defaultAlphaPixelFormat();
+            CCTexture2D::setDefaultAlphaPixelFormat(kCCTexture2DPixelFormat_RGBA8888);
+
+            if (!pApp->isLowMemoryDevice())
+            {
+                pTextureCache->addImage("CCControlColourPickerSpriteSheet.png");
+                pSpriteFrameCache->addSpriteFramesWithFile("CCControlColourPickerSpriteSheet.plist");
+            }
+
+            pTextureCache->addImage("GJ_gradientBG.png");
+            pTextureCache->addImage("edit_barBG_001.png");
+            pTextureCache->addImage("GJ_button_01.png");
+            pTextureCache->addImage("slidergroove2.png");
+            pTextureCache->addImage("sliderBar2.png");
+
+            CCTexture2D::setDefaultAlphaPixelFormat(pixFormat);
+            break;
+        }
+        case 7:
+        {
+            pTextureCache->addImage("GJ_square01.png");
+            pTextureCache->addImage("GJ_square02.png");
+            pTextureCache->addImage("GJ_square03.png");
+            pTextureCache->addImage("GJ_square04.png");
+            pTextureCache->addImage("GJ_square05.png");
+            pTextureCache->addImage("gravityLine_001.png");
+            break;
+        }
+        case 8:
+        {
+            CCLabelBMFont::create(" ", "chatFont.fnt");
+            TextArea::create("temp", "chatFont.fnt", 1.0f, 200.0f, CCPoint(0.0f, 1.0f), 20.0f, false);
+
+            pTextureCache->addImage("goldFont.png");
+            pTextureCache->addImage("bigFont.png");
+
+            CCLabelBMFont::create(" ", "goldFont.fnt");
+            CCLabelBMFont::create(" ", "bigFont.fnt");
+            break;
+        }
+        case 9:
+        {
+            // TODO: Missing ObjectManager
+            //ObjectManager* objectManager = ObjectManager::instance();
+            //objectManager->setup();
+
+            // TODO: Missing CCAnimateFrameCache
+            //CCAnimateFrameCache* pAnimateFrameCache = CCAnimateFrameCache::sharedSpriteFrameCache();
+            //pAnimateFrameCache->addSpriteFramesWithFile("Robot_AnimDesc.plist");
+
+            // TODO: Missing CCContentManager
+            //CCContentManager* pContentManager = CCContentManager::sharedManager();
+            //pContentManager->addDict("glassDestroy01.plist", false);
+            //pContentManager->addDict("coinPickupEffect.plist", false);
+            //pContentManager->addDict("explodeEffect.plist", false);
+            
+            // TODO: Missing ObjectToolbox
+            //ObjectToolbox::sharedState();
+            break;
+        }
+        case 10:
+        {
+            pTextureCache->addImage("GJ_popup.png");
+            pTextureCache->addImage("GJ_popupMD.png");
+            break;
+        }
+        case 11:
+        {
+            if (pGameManager->mUnknown4 && !mReload)
+            {
+                pGameManager->mUnknown1 = true;
+
+                // TODO: Missing EveryplayToolbox
+                //EveryplayToolbox::firstSetup();
+            }
+
+            pGameManager->tryCacheAd();
+
+            break;
+        }
+        case 12:
+        {
+            // TODO: Missing CCTextInputNode
+            //CCTextInputNode::create(200.0f, 50.0f, "Temp", "Thonburi", 24, "bigFont.fnt");
+            break;
+        }
+        case 13:
+        {
+            if (!mReload)
+            {
+                // TODO: Missing CCCircleWave
+                //CCCircleWave* circleWave = CCCircleWave::create(10.0f, 5.0f, 0.3f, true);
+                //this->addChild(circleWave);
+                //circleWave->setPosition(CCPoint(-100.0f, -100.0f));
+            }
+            break;
+        }
+        case 14:
+        {
+            updateProgress(100); // <- not in the original but it makes the progress bar actually render as full
+
+            AppDelegate* pApp = AppDelegate::get();
+            pApp->loadingIsFinished();
+            if (!mReload)
+            {
+                pGameManager->fadeInMusic("menuLoop.mp3");
+                pGameManager->syncPlatformAchievements();
+
+                // TODO: AdToolbox missing - should we even add this anyway?
+                //AdToolbox::cacheInterstitial();
+            }
+
+            loadingFinished();
+            return;
+        }
     }
 
     mStage++;

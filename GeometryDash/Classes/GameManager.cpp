@@ -81,6 +81,11 @@ void GameManager::syncPlatformAchievements()
     // TODO: Implement GameManager::syncPlatformAchievements
 }
 
+void GameManager::tryCacheAd()
+{
+    // TODO: Implement GameManager::tryCacheAd - should we even add this anyway?
+}
+
 GameManager* GameManager::sharedState()
 {
     static GameManager* gGameManager = nullptr;

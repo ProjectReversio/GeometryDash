@@ -16,6 +16,7 @@ public:
     void loadBackground(int index);
     void fadeInMusic(const char* music);
     void syncPlatformAchievements();
+    void tryCacheAd();
 
     static GameManager* sharedState();
     
@@ -24,6 +25,10 @@ public:
 private:
     int mCurrentBackground;
     bool mUseLowQualityTextures;
+
+public:
+    bool mUnknown1;
+    bool mUnknown4;
 };
 
 #endif // __GAMEMANAGER_H__

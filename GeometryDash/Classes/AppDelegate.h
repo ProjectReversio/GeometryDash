@@ -45,6 +45,8 @@ public:
 
     float bgScale();
 
+    bool isLowMemoryDevice() { return mLowMemoryDevice; }
+
 private:
     bool mInitializedGLView;
     bool mLowMemoryDevice;

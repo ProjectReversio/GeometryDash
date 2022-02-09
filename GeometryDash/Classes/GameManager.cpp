@@ -71,6 +71,16 @@ void GameManager::loadBackground(int index)
     }
 }
 
+void GameManager::fadeInMusic(const char* music)
+{
+    // TODO: Implement GameManager::fadeInMusic
+}
+
+void GameManager::syncPlatformAchievements()
+{
+    // TODO: Implement GameManager::syncPlatformAchievements
+}
+
 GameManager* GameManager::sharedState()
 {
     static GameManager* gGameManager = nullptr;

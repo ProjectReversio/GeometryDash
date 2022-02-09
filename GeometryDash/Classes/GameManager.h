@@ -14,6 +14,8 @@ public:
 
     const char* getBGTexture(int index);
     void loadBackground(int index);
+    void fadeInMusic(const char* music);
+    void syncPlatformAchievements();
 
     static GameManager* sharedState();
     

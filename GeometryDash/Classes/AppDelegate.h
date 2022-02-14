@@ -52,6 +52,9 @@ private:
     bool mLowMemoryDevice;
     bool mLowQualityTextures;
     bool mUnknown2;
+
+public:
+    cocos2d::CCScene* mMenuScene;
 };
 
 #endif // _APP_DELEGATE_H_

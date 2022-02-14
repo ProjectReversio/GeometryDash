@@ -33,9 +33,13 @@ private:
     bool mUseLowQualityTextures;
 
 public:
+    bool mUnknownBool1;
+    int mUnknownInt1;
     bool mUnknown1;
     bool mUnknown4;
+    bool mUnknown6;
     bool mShouldLoadLevelSaveData;
+    bool mUnknownBool2;
 };
 
 #endif // __GAMEMANAGER_H__

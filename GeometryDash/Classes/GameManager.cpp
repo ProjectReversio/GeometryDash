@@ -9,9 +9,13 @@ GameManager::GameManager()
     mCurrentBackground = 0;
     mUseLowQualityTextures = false;
 
+    mUnknownBool1 = false;
+    mUnknownInt1 = 0;
     mUnknown1 = false;
     mUnknown4 = false;
+    mUnknown6 = false;
     mShouldLoadLevelSaveData = false;
+    mUnknownBool2 = false;
 }
 
 GameManager::~GameManager()

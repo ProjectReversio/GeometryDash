@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "TextArea.h"
 #include "gameConfig.h"
+#include "MenuLayer.h"
 
 USING_NS_CC;
 
@@ -51,7 +52,7 @@ LoadingLayer::LoadingLayer()
 
 LoadingLayer::~LoadingLayer()
 {
-    
+    this->removeAllChildrenWithCleanup(true);
 }
 
 // on "init" you need to initialize your instance
@@ -395,7 +396,11 @@ void LoadingLayer::loadAssets()
 
 void LoadingLayer::loadingFinished()
 {
-    // TODO: Implement LoadingLayer::loadingFinished
+    CCDirector* pDirector = CCDirector::sharedDirector();
+
+    CCScene* menuLayer = MenuLayer::scene(mReload);
+
+    pDirector->replaceScene(menuLayer);
 }
 
 const char* LoadingLayer::getLoadingString()

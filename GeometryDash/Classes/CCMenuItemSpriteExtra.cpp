@@ -4,7 +4,8 @@ USING_NS_CC;
 
 CCMenuItemSpriteExtra::CCMenuItemSpriteExtra()
 {
-    mAnimationType = MENU_ANIM_TYPE_0;
+    mCurrentScale = 0.0f;
+    mAnimationType = MENU_ANIM_TYPE_SCALE;
     mUnknownPoint1 = CCPoint();
 }
 
@@ -34,6 +35,13 @@ bool CCMenuItemSpriteExtra::init(cocos2d::CCNode* normalSprite, cocos2d::CCNode*
     if (!CCMenuItemSprite::initWithNormalSprite(normalSprite, selectedSprite, nullptr, target, selector))
         return false;
 
+    this->mCurrentScale = 1.0f;
+    normalSprite->setAnchorPoint(CCPoint(0.5f, 0.5f));
+
+    // TODO: Implement CCMenuItemSpriteExtra::init
+
+    normalSprite->setPosition(normalSprite->getParent()->convertToNodeSpace(CCPoint(0.0f, 0.0f)));
+
     // TODO: Implement CCMenuItemSpriteExtra::init
 
     return true;
@@ -41,16 +49,35 @@ bool CCMenuItemSpriteExtra::init(cocos2d::CCNode* normalSprite, cocos2d::CCNode*
 
 void CCMenuItemSpriteExtra::activate()
 {
+    if (!this->isEnabled())
+        return;
+
+    this->stopAllActions();
+    if (this->mAnimationType == MENU_ANIM_TYPE_SCALE)
+        this->setScale(mCurrentScale);
+
     // TODO: Implement CCMenuItemSpriteExtra::activate
+
+    CCMenuItem::activate();
 }
 
 void CCMenuItemSpriteExtra::selected()
 {
+    if (!this->isEnabled())
+        return;
+
+    CCMenuItemSprite::selected();
+
     // TODO: Implement CCMenuItemSpriteExtra::selected
 }
 
 void CCMenuItemSpriteExtra::unselected()
 {
+    if (!this->isEnabled())
+        return;
+
+    CCMenuItemSprite::unselected();
+
     // TODO: Implement CCMenuItemSpriteExtra::unselected
 }
 

@@ -5,7 +5,7 @@
 
 typedef enum
 {
-    MENU_ANIM_TYPE_0 = 0,
+    MENU_ANIM_TYPE_SCALE = 0,
     MENU_ANIM_TYPE_1 = 1,
 } MenuAnimationType;
 
@@ -29,6 +29,7 @@ public:
 protected:
     MenuAnimationType mAnimationType;
     cocos2d::CCPoint mUnknownPoint1;
+    float mCurrentScale;
 };
 
 #endif // __CCMENUITEMSPRITEEXTRA_H__

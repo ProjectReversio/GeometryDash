@@ -15,6 +15,17 @@ public:
     void onOptionsInstant();
     void onPlay(cocos2d::CCObject* pSender);
     void onGarage(cocos2d::CCObject* pSender);
+    void onAchievements(cocos2d::CCObject* pSender);
+    void onOptions(cocos2d::CCObject* pSender);
+    void onStats(cocos2d::CCObject* pSender);
+    void onEveryplay(cocos2d::CCObject* pSender);
+    void onNewgrounds(cocos2d::CCObject* pSender);
+    void onRobTop(cocos2d::CCObject* pSender);
+    void onFacebook(cocos2d::CCObject* pSender);
+    void onTwitter(cocos2d::CCObject* pSender);
+    void onYouTube(cocos2d::CCObject* pSender);
+    void onFreeLevels(cocos2d::CCObject* pSender);
+    void onFullVersion(cocos2d::CCObject* pSender);
     void onQuit(cocos2d::CCObject* pSender);
 
     // there's no 'id' in cpp, so we recommend returning the class instance pointer

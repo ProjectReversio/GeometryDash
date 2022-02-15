@@ -88,6 +88,10 @@ bool MenuLayer::init()
     //MenuGameLayer* menuGameLayer = MenuGameLayer::create();
     //this->addChild(menuGameLayer);
 
+    // ----------------------------------------------------------------------------------------------
+    // Logos
+    // ----------------------------------------------------------------------------------------------
+
     CCSprite* logo = CCSprite::createWithSpriteFrameName("GJ_logo_001.png");
     this->addChild(logo, 2);
     logo->setPosition(CCPoint(winSize.width * 0.5f, pDirector->getScreenTop() - 50.0f));
@@ -110,6 +114,10 @@ bool MenuLayer::init()
     subLogo->setPosition(logo->getPosition() + CCPoint(150.0f, -30.0f));
 #endif
 
+    // ----------------------------------------------------------------------------------------------
+    // Main Menu
+    // ----------------------------------------------------------------------------------------------
+
     CCMenu* mainMenu = CCMenu::create();
 
     CCSprite* playButton = CCSprite::createWithSpriteFrameName("GJ_playBtn_001.png");
@@ -121,7 +129,7 @@ bool MenuLayer::init()
     CCSprite* garageButton = CCSprite::createWithSpriteFrameName("GJ_garageBtn_001.png");
     CCMenuItemSpriteExtra* garageExtra = CCMenuItemSpriteExtra::create(garageButton, nullptr, this, menu_selector(MenuLayer::onGarage));
     mainMenu->addChild(garageExtra);
-    garageExtra->setPosition(garageExtra->getPosition() + CCPoint(-110.0f, 0.0f));
+    garageExtra->setPosition(playExtra->getPosition() + CCPoint(-110.0f, 0.0f));
 
     if (!pGameManager->mUnknown6)
     {
@@ -129,21 +137,121 @@ bool MenuLayer::init()
         this->addChild(chrSel);
         chrSel->setPosition(mainMenu->convertToWorldSpace(garageExtra->getPosition()) + CCPoint(-50.0f, -50.0f));
     }
+    
+    CCSprite* fullButton = CCSprite::createWithSpriteFrameName("GJ_fullBtn_001.png");
+    CCMenuItemSpriteExtra* fullExtra = CCMenuItemSpriteExtra::create(fullButton, nullptr, this, menu_selector(MenuLayer::onFullVersion));
+    mainMenu->addChild(fullExtra);
+    fullExtra->setPosition(playExtra->getPosition() + CCPoint(110.0f, 0.0f));
 
-    // TODO: Implement MenuLayer::init
+    // ----------------------------------------------------------------------------------------------
+    // Bottom Menu
+    // ----------------------------------------------------------------------------------------------
 
-    CCMenu* quitMenu = CCMenu::create();
-    this->addChild(quitMenu, 2);
-    //quitMenu->setPosition(CCPoint(pDirector->getScreenRight() - 43.0f, pDirector->getScreenBottom() + 45.0f));
-    quitMenu->setPosition(CCPoint(pDirector->getScreenRight() - 43.0f, 0.9f));
+    CCMenu* bottomMenu = CCMenu::create();
+    this->addChild(bottomMenu);
+
+    CCSprite* achievementsButton = CCSprite::createWithSpriteFrameName("GJ_achBtn_001.png");
+    achievementsButton->setScale(1.0f);
+    CCMenuItemSpriteExtra* achievementsExtra = CCMenuItemSpriteExtra::create(achievementsButton, nullptr, this, menu_selector(MenuLayer::onAchievements));
+    bottomMenu->addChild(achievementsExtra);
+    
+    CCSprite* optionsButton = CCSprite::createWithSpriteFrameName("GJ_optionsBtn_001.png");
+    optionsButton->setScale(1.0f);
+    CCMenuItemSpriteExtra* optionsExtra = CCMenuItemSpriteExtra::create(optionsButton, nullptr, this, menu_selector(MenuLayer::onOptions));
+    bottomMenu->addChild(optionsExtra);
+
+    CCSprite* statsButton = CCSprite::createWithSpriteFrameName("GJ_statsBtn_001.png");
+    statsButton->setScale(1.0f);
+    CCMenuItemSpriteExtra* statsExtra = CCMenuItemSpriteExtra::create(statsButton, nullptr, this, menu_selector(MenuLayer::onStats));
+    bottomMenu->addChild(statsExtra);
+
+#if defined(PLATFORM_MOBILE)
+    // TODO: Missing EveryplayToolbox
+    //if (EveryplayToolbox::isEveryplaySupported())
+    {
+        CCSprite* everyplayButton = CCSprite::createWithSpriteFrameName("GJ_everyplayBtn_001.png");
+        everyplayButton->setScale(1.0f);
+        CCMenuItemSpriteExtra* everyplayExtra = CCMenuItemSpriteExtra::create(everyplayButton, nullptr, this, menu_selector(MenuLayer::onEveryplay));
+        bottomMenu->addChild(everyplayExtra);
+    }
+#endif
+
+    CCSprite* newgroundsButton = CCSprite::createWithSpriteFrameName("GJ_ngBtn_001.png");
+    newgroundsButton->setScale(1.0f);
+    CCMenuItemSpriteExtra* newgroundsExtra = CCMenuItemSpriteExtra::create(newgroundsButton, nullptr, this, menu_selector(MenuLayer::onNewgrounds));
+    bottomMenu->addChild(newgroundsExtra);
+
+    bottomMenu->setPosition(CCPoint(winSize.width * 0.5f, pDirector->getScreenBottom() + 45.0f));
+    bottomMenu->alignItemsHorizontallyWithPadding(5.0f);
+
+    // ----------------------------------------------------------------------------------------------
+    // Social Menu
+    // ----------------------------------------------------------------------------------------------
+
+    CCSprite* robtopLogo = CCSprite::createWithSpriteFrameName("robtoplogo_small.png");
+    robtopLogo->setScale(0.8f);
+    CCMenuItemSpriteExtra* robtopExtra = CCMenuItemSpriteExtra::create(robtopLogo, nullptr, this, menu_selector(MenuLayer::onRobTop));
+    robtopExtra->setSizeMult(1.5f);
+
+    CCMenu* socialsMenu = CCMenu::create(robtopExtra, nullptr);
+    this->addChild(socialsMenu, 2);
+    socialsMenu->setPosition(CCPoint(pDirector->getScreenLeft() + 50.0f, pDirector->getScreenBottom() + 30.0f - 6.0f));
+    
+    CCSprite* facebookIcon = CCSprite::createWithSpriteFrameName("gj_fbIcon_001.png");
+    facebookIcon->setScale(0.8f);
+    CCMenuItemSpriteExtra* facebookExtra = CCMenuItemSpriteExtra::create(facebookIcon, nullptr, this, menu_selector(MenuLayer::onFacebook));
+    facebookExtra->setSizeMult(1.5f);
+    socialsMenu->addChild(facebookExtra);
+
+    CCSprite* twitterIcon = CCSprite::createWithSpriteFrameName("gj_twIcon_001.png");
+    twitterIcon->setScale(0.8f);
+    CCMenuItemSpriteExtra* twitterExtra = CCMenuItemSpriteExtra::create(twitterIcon, nullptr, this, menu_selector(MenuLayer::onTwitter));
+    twitterExtra->setSizeMult(1.5f);
+    socialsMenu->addChild(twitterExtra);
+
+    CCSprite* youtubeIcon = CCSprite::createWithSpriteFrameName("gj_ytIcon_001.png");
+    youtubeIcon->setScale(0.8f);
+    CCMenuItemSpriteExtra* youtubeExtra = CCMenuItemSpriteExtra::create(youtubeIcon, nullptr, this, menu_selector(MenuLayer::onYouTube));
+    youtubeExtra->setSizeMult(1.5f);
+    socialsMenu->addChild(youtubeExtra);
+
+    facebookExtra->setPosition(socialsMenu->convertToNodeSpace(CCPoint(pDirector->getScreenLeft() + 22.0f, pDirector->getScreenBottom() + 30.0f + 25.0f)));
+    twitterExtra->setPosition(facebookExtra->getPosition() + CCPoint(30.0f, 0.0f));
+    youtubeExtra->setPosition(twitterExtra->getPosition() + CCPoint(30.0f, 0.0f));
+
+    // ----------------------------------------------------------------------------------------------
+    // Extra Menu
+    // ----------------------------------------------------------------------------------------------
+
+    // TODO: Why is this called here on android?
+    //lrand48();
+
+    CCSprite* freeLevelsButton = CCSprite::createWithSpriteFrameName("GJ_freeLevelsBtn_001.png");
+    CCMenuItemSpriteExtra* freeLevelsExtra = CCMenuItemSpriteExtra::create(freeLevelsButton, nullptr, this, menu_selector(MenuLayer::onFreeLevels));
+
+    if (!pGameManager->getGameVariable("0053"))
+    {
+        CCScaleTo* scaleTo = CCScaleTo::create(0.5f, 1.1f);
+        CCEaseInOut* easeInOut = CCEaseInOut::create(scaleTo, 2.0f);
+        CCScaleTo* scaleTo2 = CCScaleTo::create(0.5f, 1.0f);
+        CCEaseInOut* easeInOut2 = CCEaseInOut::create(scaleTo2, 2.0f);
+        CCSequence* sequence = CCSequence::create(easeInOut, easeInOut2, nullptr);
+        CCRepeatForever* repeatForever = CCRepeatForever::create(sequence);
+        freeLevelsButton->runAction(repeatForever);
+    }
+    
+    CCMenu* extraMenu = CCMenu::create(freeLevelsExtra, nullptr);
+    this->addChild(extraMenu, 2);
+    extraMenu->setPosition(CCPoint(pDirector->getScreenRight() - 43.0f, pDirector->getScreenBottom() + 45.0f));
+    //extraMenu->setPosition(CCPoint(pDirector->getScreenRight() - 43.0f, 0.9f));
 
 #if defined(PLATFORM_DESKTOP)
     CCSprite* closeButton = CCSprite::createWithSpriteFrameName("GJ_closeBtn_001.png");
     closeButton->setScale(0.7f);
     CCMenuItemSpriteExtra *closeExtra = CCMenuItemSpriteExtra::create(closeButton, nullptr, this, menu_selector(MenuLayer::onQuit));
-    quitMenu->addChild(closeExtra);
+    extraMenu->addChild(closeExtra);
     CCPoint point(18.0f, pDirector->getScreenTop() - 18.0f);
-    closeExtra->setPosition(quitMenu->convertToNodeSpace(point));
+    closeExtra->setPosition(extraMenu->convertToNodeSpace(point));
 #endif
 
     // TODO: Missing PlatformToolbox
@@ -170,6 +278,61 @@ void MenuLayer::onPlay(cocos2d::CCObject* pSender)
 void MenuLayer::onGarage(cocos2d::CCObject* pSender)
 {
     // TODO: Implement MenuLayer::onGarage
+}
+
+void MenuLayer::onAchievements(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onAchievements
+}
+
+void MenuLayer::onOptions(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onOptions
+}
+
+void MenuLayer::onStats(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onStats
+}
+
+void MenuLayer::onEveryplay(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onEveryplay
+}
+
+void MenuLayer::onNewgrounds(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onNewgrounds
+}
+
+void MenuLayer::onRobTop(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onRobTop
+}
+
+void MenuLayer::onFacebook(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onFacebook
+}
+
+void MenuLayer::onTwitter(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onTwitter
+}
+
+void MenuLayer::onYouTube(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onYouTube
+}
+
+void MenuLayer::onFreeLevels(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onFreeLevels
+}
+
+void MenuLayer::onFullVersion(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onFullVersion
 }
 
 void MenuLayer::onQuit(cocos2d::CCObject* pSender)

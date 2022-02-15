@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+class CCMenuItemSpriteExtra;
+
 class MenuLayer : public cocos2d::CCLayer
 {
 public:
@@ -13,17 +15,24 @@ public:
     virtual bool init();
 
     void onOptionsInstant();
+    void showMeltdownPromo();
+    void updateUserProfileButton();
+
     void onPlay(cocos2d::CCObject* pSender);
     void onGarage(cocos2d::CCObject* pSender);
+    void onCreator(cocos2d::CCObject* pSender);
+    void onMyProfile(cocos2d::CCObject* pSender);
     void onAchievements(cocos2d::CCObject* pSender);
     void onOptions(cocos2d::CCObject* pSender);
     void onStats(cocos2d::CCObject* pSender);
+    void onDaily(cocos2d::CCObject* pSender);
     void onEveryplay(cocos2d::CCObject* pSender);
     void onNewgrounds(cocos2d::CCObject* pSender);
     void onRobTop(cocos2d::CCObject* pSender);
     void onFacebook(cocos2d::CCObject* pSender);
     void onTwitter(cocos2d::CCObject* pSender);
     void onYouTube(cocos2d::CCObject* pSender);
+    void onMoreGames(cocos2d::CCObject* pSender);
     void onFreeLevels(cocos2d::CCObject* pSender);
     void onFullVersion(cocos2d::CCObject* pSender);
     void onQuit(cocos2d::CCObject* pSender);
@@ -33,6 +42,11 @@ public:
 
     // implement the "static node()" method manually
     static MenuLayer* node();
+
+protected:
+    CCMenuItemSpriteExtra* mProfileButton;
+    cocos2d::CCSprite* mProfileHelpText;
+    cocos2d::CCLabelBMFont* mProfileText;
 };
 
 #endif // __MENULAYER_H__

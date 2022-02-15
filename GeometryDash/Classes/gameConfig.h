@@ -7,6 +7,8 @@
 //#define GD_LITE
 #define GD_MAIN
 
+//#define GD_TRIAL_VERSION
+
 //#define PLATFORM_MOBILE
 #define PLATFORM_DESKTOP
 

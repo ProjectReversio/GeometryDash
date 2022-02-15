@@ -138,6 +138,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\LoadingLayer.cpp" />
     <ClCompile Include="..\Classes\MenuLayer.cpp" />
+    <ClCompile Include="..\Classes\PlatformToolbox.cpp" />
     <ClCompile Include="..\Classes\TextArea.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -148,6 +149,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\LoadingLayer.h" />
     <ClInclude Include="..\Classes\MenuLayer.h" />
+    <ClInclude Include="..\Classes\PlatformToolbox.h" />
     <ClInclude Include="..\Classes\TextArea.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

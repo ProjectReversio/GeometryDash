@@ -5,6 +5,7 @@
 #include "TextArea.h"
 #include "gameConfig.h"
 #include "MenuLayer.h"
+#include "PlatformToolbox.h"
 
 USING_NS_CC;
 
@@ -191,8 +192,7 @@ bool LoadingLayer::init(bool reload)
     {
         if (pGameManager->getGameVariable("0034"))
         {
-            // TODO: Missing PlatformToolbox
-            //PlatformToolbox::activateGameCenter();
+            PlatformToolbox::activateGameCenter();
         }
     }
 

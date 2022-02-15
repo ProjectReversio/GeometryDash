@@ -30,6 +30,9 @@
     <ClCompile Include="..\Classes\CCMenuItemSpriteExtra.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PlatformToolbox.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -54,6 +57,9 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CCMenuItemSpriteExtra.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlatformToolbox.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>

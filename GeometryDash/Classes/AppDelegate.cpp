@@ -2,6 +2,7 @@
 
 #include "GameManager.h"
 #include "LoadingLayer.h"
+#include "PlatformToolbox.h"
 
 USING_NS_CC;
 
@@ -73,9 +74,8 @@ void AppDelegate::setupGLView()
         const CCSize windowSize = pEGLView->getFrameSize();
         this->mUnknown2 = (-windowSize.width == 2436.0f) & 1; // TODO: What is this about?
         pEGLView->setFrameSize(windowSize.width, windowSize.height);
-
-        // TODO: PlatformToolbox is missing
-        //this->mLowMemoryDevice = PlatformToolbox::isLowMemoryDevice();
+        
+        this->mLowMemoryDevice = PlatformToolbox::isLowMemoryDevice();
         
         pDirector->setupScreenScale(contentSize, windowSize, this->mLowMemoryDevice ? TextureQuality::LowQuality : TextureQuality::HighQuality);
     }

@@ -10,12 +10,16 @@ GameManager::GameManager()
     mUseLowQualityTextures = false;
 
     mUnknownBool1 = false;
+    mUnknownBool4 = false;
+    mUnknownBool3 = false;
     mUnknownInt1 = 0;
     mUnknown1 = false;
     mUnknown4 = false;
-    mUnknown6 = false;
+    mUsedGarageButton = false;
     mShouldLoadLevelSaveData = false;
     mUnknownBool2 = false;
+    mUsedCreatorButton = false;
+    mCurrentMenu = nullptr;
 }
 
 GameManager::~GameManager()
@@ -116,7 +120,7 @@ GameManager* GameManager::sharedState()
     static GameManager* gGameManager = nullptr;
     if (!gGameManager)
     {
-        gGameManager = GameManager::create();
+        gGameManager = new GameManager();
         gGameManager->init();
     }
 

@@ -4,6 +4,7 @@
 #include "CCMenuItemSpriteExtra.h"
 #include "GameManager.h"
 #include "gameConfig.h"
+#include "PlatformToolbox.h"
 
 USING_NS_CC;
 
@@ -54,7 +55,9 @@ MenuLayer* MenuLayer::node()
 
 MenuLayer::MenuLayer()
 {
-    
+    mProfileHelpText = nullptr;
+    mProfileText = nullptr;
+    mProfileButton = nullptr;
 }
 
 MenuLayer::~MenuLayer()
@@ -131,17 +134,35 @@ bool MenuLayer::init()
     mainMenu->addChild(garageExtra);
     garageExtra->setPosition(playExtra->getPosition() + CCPoint(-110.0f, 0.0f));
 
-    if (!pGameManager->mUnknown6)
+    if (!pGameManager->mUsedGarageButton)
     {
         CCSprite* chrSel = CCSprite::createWithSpriteFrameName("GJ_chrSel_001.png");
         this->addChild(chrSel);
         chrSel->setPosition(mainMenu->convertToWorldSpace(garageExtra->getPosition()) + CCPoint(-50.0f, -50.0f));
     }
-    
+
+#if defined(GD_TRIAL_VERSION) && !defined(GD_WORLD)
     CCSprite* fullButton = CCSprite::createWithSpriteFrameName("GJ_fullBtn_001.png");
     CCMenuItemSpriteExtra* fullExtra = CCMenuItemSpriteExtra::create(fullButton, nullptr, this, menu_selector(MenuLayer::onFullVersion));
+#else
+    CCSprite* fullButton = CCSprite::createWithSpriteFrameName("GJ_creatorBtn_001.png");
+    CCMenuItemSpriteExtra* fullExtra = CCMenuItemSpriteExtra::create(fullButton, nullptr, this, menu_selector(MenuLayer::onCreator));
+#endif
     mainMenu->addChild(fullExtra);
     fullExtra->setPosition(playExtra->getPosition() + CCPoint(110.0f, 0.0f));
+
+#if !defined(GD_TRIAL_VERSION) || defined(GD_WORLD)
+    if (!pGameManager->mUsedCreatorButton)
+    {
+#ifdef GD_WORLD
+        CCSprite* lvlEditButton = CCSprite::createWithSpriteFrameName("GJ_lvlEditWorld_001.png");
+#else
+        CCSprite* lvlEditButton = CCSprite::createWithSpriteFrameName("GJ_lvlEdit_001.png");
+#endif
+        this->addChild(lvlEditButton);
+        lvlEditButton->setPosition(mainMenu->convertToWorldSpace(fullExtra->getPosition()) + CCPoint(50.0f, -50.0f));
+    }
+#endif
 
     // ----------------------------------------------------------------------------------------------
     // Bottom Menu
@@ -226,9 +247,10 @@ bool MenuLayer::init()
     // TODO: Why is this called here on android?
     //lrand48();
 
+#ifdef GD_TRIAL_VERSION
     CCSprite* freeLevelsButton = CCSprite::createWithSpriteFrameName("GJ_freeLevelsBtn_001.png");
     CCMenuItemSpriteExtra* freeLevelsExtra = CCMenuItemSpriteExtra::create(freeLevelsButton, nullptr, this, menu_selector(MenuLayer::onFreeLevels));
-
+    
     if (!pGameManager->getGameVariable("0053"))
     {
         CCScaleTo* scaleTo = CCScaleTo::create(0.5f, 1.1f);
@@ -239,11 +261,37 @@ bool MenuLayer::init()
         CCRepeatForever* repeatForever = CCRepeatForever::create(sequence);
         freeLevelsButton->runAction(repeatForever);
     }
+#else
+    CCSprite* freeLevelsButton = CCSprite::createWithSpriteFrameName("GJ_moreGamesBtn_001.png");
+    CCMenuItemSpriteExtra* freeLevelsExtra = CCMenuItemSpriteExtra::create(freeLevelsButton, nullptr, this, menu_selector(MenuLayer::onMoreGames));
+#endif
     
     CCMenu* extraMenu = CCMenu::create(freeLevelsExtra, nullptr);
     this->addChild(extraMenu, 2);
+
     extraMenu->setPosition(CCPoint(pDirector->getScreenRight() - 43.0f, pDirector->getScreenBottom() + 45.0f));
     //extraMenu->setPosition(CCPoint(pDirector->getScreenRight() - 43.0f, 0.9f));
+
+#if defined(PLATFORM_MOBILE)
+    // TODO: Missing AdToolbox
+    //AdToolbox::cacheInterstitial();
+
+    if (!pGameManager->mUnknownBool3)
+    {
+        if (!pGameManager->getGameVariable("0106"))
+        {
+            // Only show promo once
+            pGameManager->setGameVariable("0106", true);
+
+            CCDelayTime* delay = CCDelayTime::create(0.1f);
+            CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(MenuLayer::showMeltdownPromo));
+            CCSequence* sequence = CCSequence::create(delay, callFunc, nullptr);
+            this->runAction(sequence);
+        }
+    }
+#endif
+
+    pGameManager->mUnknownBool4 = false;
 
 #if defined(PLATFORM_DESKTOP)
     CCSprite* closeButton = CCSprite::createWithSpriteFrameName("GJ_closeBtn_001.png");
@@ -254,13 +302,42 @@ bool MenuLayer::init()
     closeExtra->setPosition(extraMenu->convertToNodeSpace(point));
 #endif
 
-    // TODO: Missing PlatformToolbox
-    //if (PlatformToolbox::isControllerConnected())
-    //{
-    //    // TODO: Implement MenuLayer::init
-    //}
+    if (PlatformToolbox::isControllerConnected())
+    {
+        // TODO: Implement MenuLayer::init
+    }
+    
+    CCSprite* profileButton = CCSprite::createWithSpriteFrameName("GJ_profileButton_001.png");
+    this->mProfileButton = CCMenuItemSpriteExtra::create(profileButton, nullptr, this, menu_selector(MenuLayer::onMyProfile));
+    mainMenu->addChild(this->mProfileButton, 2);
+    this->mProfileButton->setPosition(mainMenu->convertToNodeSpace(CCPoint(45.0f, 105.0f)));
 
-    // TODO: Implement MenuLayer::init
+    this->mProfileText = CCLabelBMFont::create(" ", "goldFont.fnt");
+    this->addChild(this->mProfileText, 2);
+    this->mProfileText->setPosition(CCPoint(45.0f, 105.0f) + CCPoint(2.0f, 36.0f));
+
+    // TODO: Missing CCLabelBMFont::limitLabelWidth
+    //this->mProfileText->limitLabelWidth(70.0f, 0.7f, 0.0f);
+
+    if (!pGameManager->getGameVariable("0048") && pGameManager->mUsedGarageButton)
+    {
+        this->mProfileHelpText = CCSprite::createWithSpriteFrameName("GJ_viewProfileTxt_001.png");
+        this->addChild(this->mProfileHelpText, 2);
+        this->mProfileHelpText->setPosition(CCPoint(45.0f, 105.0f) + CCPoint(76.0f, -1.0f));
+    }
+
+    this->updateUserProfileButton();
+    pGameManager->mCurrentMenu = this;
+
+#if !defined(GD_TRIAL_VERSION) || defined(GD_WORLD)
+    CCSprite* dailyButton = CCSprite::createWithSpriteFrameName("GJ_dailyRewardBtn_001.png");
+#else
+    CCSprite* dailyButton = CCSprite::createWithSpriteFrameName("GJ_freeStuffBtn_001.png");
+#endif
+    CCMenuItemSpriteExtra* dailyExtra = CCMenuItemSpriteExtra::create(dailyButton, nullptr, this, menu_selector(MenuLayer::onDaily));
+    bottomMenu->addChild(dailyExtra);
+    dailyExtra->setPosition(bottomMenu->convertToNodeSpace(CCPoint(pDirector->getScreenRight() - 40.0f, winSize.height * 0.5f + 20.0f)));
+    dailyExtra->setSizeMult(1.5f);
 
     return true;
 }
@@ -268,6 +345,27 @@ bool MenuLayer::init()
 void MenuLayer::onOptionsInstant()
 {
     // TODO: Implement MenuLayer::onOptionsInstant
+}
+
+void MenuLayer::showMeltdownPromo()
+{
+    // TODO: Implement MenuLayer::showMeltdownPromo
+}
+
+void MenuLayer::updateUserProfileButton()
+{
+    // This implementation is specific to SubZero
+    // TODO: Implement other versions of this
+
+    // TODO: Missing GJAccountManager
+    //GJAccountManager* pAccountManager = GJAccountManager::sharedState();
+
+    mProfileButton->setVisible(false);
+    mProfileText->setVisible(false);
+    if (mProfileHelpText)
+        mProfileHelpText->setVisible(false);
+
+    // TODO: Implement MenuLayer::updateUserProfileButton
 }
 
 void MenuLayer::onPlay(cocos2d::CCObject* pSender)
@@ -278,6 +376,24 @@ void MenuLayer::onPlay(cocos2d::CCObject* pSender)
 void MenuLayer::onGarage(cocos2d::CCObject* pSender)
 {
     // TODO: Implement MenuLayer::onGarage
+
+    GameManager::sharedState()->mUsedGarageButton = true;
+
+    // TODO: Implement MenuLayer::onGarage
+}
+
+void MenuLayer::onCreator(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onCreator
+
+    GameManager::sharedState()->mUsedCreatorButton = true;
+
+    // TODO: Implement MenuLayer::onCreator
+}
+
+void MenuLayer::onMyProfile(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onMyProfile
 }
 
 void MenuLayer::onAchievements(cocos2d::CCObject* pSender)
@@ -293,6 +409,11 @@ void MenuLayer::onOptions(cocos2d::CCObject* pSender)
 void MenuLayer::onStats(cocos2d::CCObject* pSender)
 {
     // TODO: Implement MenuLayer::onStats
+}
+
+void MenuLayer::onDaily(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onDaily
 }
 
 void MenuLayer::onEveryplay(cocos2d::CCObject* pSender)
@@ -323,6 +444,11 @@ void MenuLayer::onTwitter(cocos2d::CCObject* pSender)
 void MenuLayer::onYouTube(cocos2d::CCObject* pSender)
 {
     // TODO: Implement MenuLayer::onYouTube
+}
+
+void MenuLayer::onMoreGames(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onMoreGames
 }
 
 void MenuLayer::onFreeLevels(cocos2d::CCObject* pSender)

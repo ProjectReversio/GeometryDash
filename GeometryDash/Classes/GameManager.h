@@ -25,8 +25,6 @@ public:
     void tryCacheAd();
 
     static GameManager* sharedState();
-    
-    CREATE_FUNC(GameManager);
 
 private:
     int mCurrentBackground;
@@ -34,12 +32,16 @@ private:
 
 public:
     bool mUnknownBool1;
+    bool mUnknownBool4;
+    bool mUnknownBool3;
     int mUnknownInt1;
     bool mUnknown1;
     bool mUnknown4;
-    bool mUnknown6;
+    bool mUsedGarageButton;
     bool mShouldLoadLevelSaveData;
     bool mUnknownBool2;
+    bool mUsedCreatorButton;
+    cocos2d::CCLayer* mCurrentMenu;
 };
 
 #endif // __GAMEMANAGER_H__

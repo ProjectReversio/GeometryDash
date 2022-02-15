@@ -382,7 +382,11 @@ void MenuLayer::onPlay(cocos2d::CCObject* pSender)
     GameManager::sharedState()->mUnknownInt1 = 8;
 
     CCDirector* pDirector = CCDirector::sharedDirector();
+#ifdef GD_WORLD
+    CCScene* levelSelect = WorldSelectLayer::scene(0);
+#else
     CCScene* levelSelect = LevelSelectLayer::scene(0);
+#endif
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, levelSelect);
     pDirector->replaceScene(fade);
 }

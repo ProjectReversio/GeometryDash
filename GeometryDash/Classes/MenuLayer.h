@@ -17,6 +17,7 @@ public:
     void onOptionsInstant();
     void showMeltdownPromo();
     void updateUserProfileButton();
+    void willClose();
 
     void onPlay(cocos2d::CCObject* pSender);
     void onGarage(cocos2d::CCObject* pSender);

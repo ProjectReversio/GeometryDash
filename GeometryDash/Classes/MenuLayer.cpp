@@ -4,6 +4,7 @@
 #include "CCMenuItemSpriteExtra.h"
 #include "GameManager.h"
 #include "gameConfig.h"
+#include "LevelSelectLayer.h"
 #include "PlatformToolbox.h"
 
 USING_NS_CC;
@@ -368,14 +369,27 @@ void MenuLayer::updateUserProfileButton()
     // TODO: Implement MenuLayer::updateUserProfileButton
 }
 
+void MenuLayer::willClose()
+{
+    // TODO: Implement MenuLayer::willClose
+
+    GameManager::sharedState()->mUnknownBool1 = false;
+}
+
 void MenuLayer::onPlay(cocos2d::CCObject* pSender)
 {
-    // TODO: Implement MenuLayer::onPlay
+    this->willClose();
+    GameManager::sharedState()->mUnknownInt1 = 8;
+
+    CCDirector* pDirector = CCDirector::sharedDirector();
+    CCScene* levelSelect = LevelSelectLayer::scene(0);
+    CCTransitionFade* fade = CCTransitionFade::create(0.5f, levelSelect);
+    pDirector->replaceScene(fade);
 }
 
 void MenuLayer::onGarage(cocos2d::CCObject* pSender)
 {
-    // TODO: Implement MenuLayer::onGarage
+    this->willClose();
 
     GameManager::sharedState()->mUsedGarageButton = true;
 
@@ -384,7 +398,7 @@ void MenuLayer::onGarage(cocos2d::CCObject* pSender)
 
 void MenuLayer::onCreator(cocos2d::CCObject* pSender)
 {
-    // TODO: Implement MenuLayer::onCreator
+    this->willClose();
 
     GameManager::sharedState()->mUsedCreatorButton = true;
 

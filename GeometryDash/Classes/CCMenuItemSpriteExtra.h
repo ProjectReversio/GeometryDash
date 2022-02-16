@@ -6,7 +6,7 @@
 typedef enum
 {
     MENU_ANIM_TYPE_SCALE = 0,
-    MENU_ANIM_TYPE_1 = 1,
+    MENU_ANIM_TYPE_MOVE = 1,
 } MenuAnimationType;
 
 class CCMenuItemSpriteExtra : public cocos2d::CCMenuItemSprite
@@ -28,8 +28,18 @@ public:
 
 protected:
     MenuAnimationType mAnimationType;
-    cocos2d::CCPoint mUnknownPoint1;
-    float mCurrentScale;
+    cocos2d::CCPoint mOffsetPosition;
+    float mScale;
+    std::string mSelectSound;
+    std::string mHoverSound;
+    float mUnknownSFXValue;
+    float mDarkenAmount;
+    float mSelectDuration;
+    float mUnselectDuration;
+    cocos2d::CCPoint mOffsetPositionSelected;
+    bool mUseAnimation;
+    bool mDarken;
+    float mSelectedScale;
 };
 
 #endif // __CCMENUITEMSPRITEEXTRA_H__

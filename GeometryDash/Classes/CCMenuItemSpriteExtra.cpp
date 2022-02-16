@@ -4,9 +4,19 @@ USING_NS_CC;
 
 CCMenuItemSpriteExtra::CCMenuItemSpriteExtra()
 {
-    mCurrentScale = 0.0f;
+    mScale = 0.0f;
+    mSelectedScale = 1.0f;
+    mUseAnimation = false;
+    mDarken = false;
+    mUnknownSFXValue = 1.0f;
+    mSelectSound = "";
+    mHoverSound = "";
+    mDarkenAmount = 0.78431f;
+    mOffsetPositionSelected = CCPoint();
+    mSelectDuration = 0.3f;
+    mUnselectDuration = 0.4f;
     mAnimationType = MENU_ANIM_TYPE_SCALE;
-    mUnknownPoint1 = CCPoint();
+    mOffsetPosition = CCPoint();
 }
 
 CCMenuItemSpriteExtra::~CCMenuItemSpriteExtra()
@@ -35,14 +45,17 @@ bool CCMenuItemSpriteExtra::init(cocos2d::CCNode* normalSprite, cocos2d::CCNode*
     if (!CCMenuItemSprite::initWithNormalSprite(normalSprite, selectedSprite, nullptr, target, selector))
         return false;
 
-    this->mCurrentScale = 1.0f;
+    this->mScale = 1.0f;
     normalSprite->setAnchorPoint(CCPoint(0.5f, 0.5f));
 
-    // TODO: Implement CCMenuItemSpriteExtra::init
+    CCSize size = normalSprite->getContentSize();
+    this->setContentSize(CCSize(size.width * normalSprite->getScaleX(), size.height));
 
     normalSprite->setPosition(normalSprite->getParent()->convertToNodeSpace(CCPoint(0.0f, 0.0f)));
 
-    // TODO: Implement CCMenuItemSpriteExtra::init
+    //this->mDarken = true;
+    this->mUseAnimation = true;
+    this->mSelectedScale = 1.26f;
 
     return true;
 }
@@ -54,9 +67,14 @@ void CCMenuItemSpriteExtra::activate()
 
     this->stopAllActions();
     if (this->mAnimationType == MENU_ANIM_TYPE_SCALE)
-        this->setScale(mCurrentScale);
+        this->setScale(mScale);
 
-    // TODO: Implement CCMenuItemSpriteExtra::activate
+    if (!this->mSelectSound.empty())
+    {
+        // TODO: Missing GameSoundManager
+        //GameSoundManager* pSoundManager = GameSoundManager::sharedManager();
+        //pSoundManager->playEffect(this->mSelectSound, 1.0f, 0.0f, this->mUnknownSFXValue);
+    }
 
     CCMenuItem::activate();
 }
@@ -68,7 +86,45 @@ void CCMenuItemSpriteExtra::selected()
 
     CCMenuItemSprite::selected();
 
-    // TODO: Implement CCMenuItemSpriteExtra::selected
+    if (!mHoverSound.empty())
+    {
+        // TODO: Missing GameSoundManager
+        //GameSoundManager* pSoundManager = GameSoundManager::sharedManager();
+        //pSoundManager->playEffect(this->mHoverSound, 1.0f, 0.0f, this->mUnknownSFXValue);
+    }
+
+    if (mDarken)
+    {
+        unsigned char color = this->mDarkenAmount * 255.0f;
+        CCSprite* sprite = (CCSprite*)this->getNormalImage();
+        sprite->setColor({ color, color, color });
+    }
+
+    if (mUseAnimation)
+    {
+        switch (mAnimationType)
+        {
+            case MENU_ANIM_TYPE_MOVE:
+            {
+                CCNode* node = this->getNormalImage();
+                node->stopActionByTag(0);
+                CCMoveTo* moveTo = CCMoveTo::create(mSelectDuration, mOffsetPosition + mOffsetPositionSelected);
+                CCEaseInOut* ease = CCEaseInOut::create(moveTo, 1.5f);
+                ease->setTag(0);
+                node->runAction(ease);
+                break;
+            }
+            case MENU_ANIM_TYPE_SCALE:
+            {
+                this->stopActionByTag(0);
+                CCScaleTo* scaleTo = CCScaleTo::create(mSelectDuration, mScale * mSelectedScale);
+                CCEaseBounceOut* ease = CCEaseBounceOut::create(scaleTo);
+                ease->setTag(0);
+                this->runAction(ease);
+                break;
+            }
+        }
+    }
 }
 
 void CCMenuItemSpriteExtra::unselected()
@@ -78,15 +134,61 @@ void CCMenuItemSpriteExtra::unselected()
 
     CCMenuItemSprite::unselected();
 
-    // TODO: Implement CCMenuItemSpriteExtra::unselected
+    if (mDarken)
+    {
+        CCSprite* sprite = (CCSprite*)this->getNormalImage();
+        sprite->setColor(ccWHITE);
+    }
+
+    if (mUseAnimation)
+    {
+        switch (mAnimationType)
+        {
+            case MENU_ANIM_TYPE_MOVE:
+            {
+                CCNode* node = this->getNormalImage();
+                node->stopActionByTag(0);
+                CCMoveTo* moveTo = CCMoveTo::create(mUnselectDuration, mOffsetPosition);
+                CCEaseInOut* ease = CCEaseInOut::create(moveTo, 2.0f);
+                ease->setTag(0);
+                node->runAction(ease);
+                break;
+            }
+            case MENU_ANIM_TYPE_SCALE:
+            {
+                this->stopActionByTag(0);
+                CCScaleTo* scaleTo = CCScaleTo::create(mUnselectDuration, mScale);
+                CCEaseBounceOut* ease = CCEaseBounceOut::create(scaleTo);
+                ease->setTag(0);
+                this->runAction(ease);
+                break;
+            }
+        }
+    }
 }
 
 void CCMenuItemSpriteExtra::setSizeMult(float size)
 {
-    // TODO: Implement CCMenuItemSpriteExtra::setSizeMult
+    CCNode* normalImage = this->getNormalImage();
+    if (!normalImage)
+        return;
+
+    CCSize oldSize = this->getContentSize();
+    CCSize imgSize = normalImage->getContentSize();
+
+    float sizeX = imgSize.width * normalImage->getScaleX() * size;
+    float sizeY = imgSize.height * normalImage->getScaleY() * size;
+
+    CCSize newSize(sizeX, sizeY);
+
+    this->setContentSize(newSize);
+
+    CCSize sz(newSize.width - oldSize.width, newSize.height - oldSize.height);
+    normalImage->setPosition(normalImage->getPosition() + CCPoint(sz.width * 0.5f, sz.height * 0.5f));
 }
 
 void CCMenuItemSpriteExtra::useAnimationType(MenuAnimationType type)
 {
-    // TODO: Implement CCMenuItemSpriteExtra::useAnimationType
+    this->mOffsetPosition = this->getNormalImage()->getPosition();
+    this->mAnimationType = type;
 }

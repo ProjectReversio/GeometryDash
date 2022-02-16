@@ -7,6 +7,7 @@ USING_NS_CC;
 GameManager::GameManager()
 {
     mCurrentBackground = 0;
+    mGroundTexture = 0;
     mUseLowQualityTextures = false;
 
     mUnknownBool1 = false;

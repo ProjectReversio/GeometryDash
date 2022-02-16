@@ -42,6 +42,7 @@ public:
     bool mUnknownBool2;
     bool mUsedCreatorButton;
     cocos2d::CCLayer* mCurrentMenu;
+    int mGroundTexture;
 };
 
 #endif // __GAMEMANAGER_H__

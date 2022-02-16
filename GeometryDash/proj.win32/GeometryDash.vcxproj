@@ -134,6 +134,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\BoomScrollLayer.cpp" />
     <ClCompile Include="..\Classes\CCMenuItemSpriteExtra.cpp" />
     <ClCompile Include="..\Classes\GameLevelManager.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
@@ -149,6 +150,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\BoomScrollLayer.h" />
     <ClInclude Include="..\Classes\CCMenuItemSpriteExtra.h" />
     <ClInclude Include="..\Classes\gameConfig.h" />
     <ClInclude Include="..\Classes\GameLevelManager.h" />

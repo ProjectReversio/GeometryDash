@@ -2,12 +2,13 @@
 #define __LEVELSELECTLAYER_H__
 
 #include "cocos2d.h"
+#include "BoomScrollLayer.h"
 
 static bool s_didClick = false;
 
 class GJGroundLayer;
 
-class LevelSelectLayer : public cocos2d::CCLayer
+class LevelSelectLayer : public cocos2d::CCLayer, public DynamicScrollDelegate
 {
 public:
     LevelSelectLayer();
@@ -20,6 +21,10 @@ public:
     void onInfo(cocos2d::CCObject* pSender);
     void onDownload(cocos2d::CCObject* pSender);
 
+    void scrollLayerMoved(const cocos2d::CCPoint& point);
+
+    void updatePageWithObject(cocos2d::CCObject* obj1, cocos2d::CCObject* obj2) override;
+
     virtual bool init(int page);
     
     static cocos2d::CCScene* scene(int page);
@@ -31,6 +36,7 @@ protected:
     cocos2d::CCSprite* mBackgroundSprite;
     GJGroundLayer* mGroundLayer;
     float mUnknown1;
+    BoomScrollLayer* mBoomScrollLayer;
 };
 
 #endif // __LEVELSELECTLAYER_H__

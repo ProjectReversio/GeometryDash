@@ -12,6 +12,8 @@ public:
 
     bool init(GJGameLevel* level);
 
+    void updateDynamicPage(GJGameLevel* level);
+
     static LevelPage* create(GJGameLevel* level);
 };
 

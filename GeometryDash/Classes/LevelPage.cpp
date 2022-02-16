@@ -37,3 +37,8 @@ bool LevelPage::init(GJGameLevel* level)
 
     return true;
 }
+
+void LevelPage::updateDynamicPage(GJGameLevel* level)
+{
+    // TODO: Implement LevelPage::updateDynamicPage
+}

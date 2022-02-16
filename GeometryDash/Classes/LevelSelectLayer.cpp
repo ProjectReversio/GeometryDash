@@ -130,20 +130,36 @@ bool LevelSelectLayer::init(int page)
     int index2 = 3;
     do
     {
-        LevelPage* page = LevelPage::create(nullptr);
+        LevelPage* lvlPage = LevelPage::create(nullptr);
         index2--;
-        pageArray->addObject(page);
+        pageArray->addObject(lvlPage);
     } while (index2 > 0);
     
     GJGameLevel* level = GJGameLevel::create();
     // TODO: Implement LevelSelectLayer::init
     levelArray->addObject(level);
 
-    // TODO: Implement LevelSelectLayer::init
+    this->mBoomScrollLayer = BoomScrollLayer::create(pageArray, 0, true, levelArray, this);
+    this->addChild(mBoomScrollLayer);
+
+    mBoomScrollLayer->setPagesIndicatorPosition(CCPoint(winSize.width * 0.5f, pDirector->getScreenBottom() + 15.0f));
 
     this->mUnknown1 = winSize.width;
 
     // TODO: Implement LevelSelectLayer::init
+
+    if (page == 0)
+    {
+        this->scrollLayerMoved(CCPoint());
+    }
+    else if (page == 3)
+    {
+        mBoomScrollLayer->instantMoveToPage(2);
+    }
+    else
+    {
+        mBoomScrollLayer->instantMoveToPage(page);
+    }
 
     CCLabelBMFont* downloadTxt = CCLabelBMFont::create("Download the soundtracks", "bigFont.fnt");
     downloadTxt->setScale(0.5f);
@@ -250,4 +266,17 @@ void LevelSelectLayer::onInfo(cocos2d::CCObject* pSender)
 void LevelSelectLayer::onDownload(cocos2d::CCObject* pSender)
 {
     // TODO: Implement LevelSelectLayer::onDownload
+}
+
+void LevelSelectLayer::scrollLayerMoved(const cocos2d::CCPoint& point)
+{
+    // TODO: Implement LevelSelectLayer::scrollLayerMoved
+}
+
+void LevelSelectLayer::updatePageWithObject(cocos2d::CCObject* obj1, cocos2d::CCObject* obj2)
+{
+    LevelPage* page = (LevelPage*)obj1;
+    GJGameLevel* level = (GJGameLevel*)obj2;
+
+    page->updateDynamicPage(level);
 }

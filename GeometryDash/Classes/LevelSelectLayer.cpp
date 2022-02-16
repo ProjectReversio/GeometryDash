@@ -2,8 +2,10 @@
 
 #include "AppDelegate.h"
 #include "CCMenuItemSpriteExtra.h"
+#include "GameLevelManager.h"
 #include "GameManager.h"
 #include "GJGroundLayer.h"
+#include "LevelPage.h"
 #include "MenuLayer.h"
 #include "PlatformToolbox.h"
 
@@ -118,12 +120,11 @@ bool LevelSelectLayer::init(int page)
 
     int index = 4001;
 
-    // TODO: Missing various classes
-    /*GameLevelManager* pLevelManager = GameLevelManager::sharedState();
-
+    GameLevelManager* pLevelManager = GameLevelManager::sharedState();
+    
     do
     {
-        levelArray->addObject(pLevelManager->getMainLevel(index++, 1));
+        levelArray->addObject(pLevelManager->getMainLevel(index++, true));
     } while(index != 4004);
 
     int index2 = 3;
@@ -136,7 +137,7 @@ bool LevelSelectLayer::init(int page)
     
     GJGameLevel* level = GJGameLevel::create();
     // TODO: Implement LevelSelectLayer::init
-    levelArray->addObject(level);*/
+    levelArray->addObject(level);
 
     // TODO: Implement LevelSelectLayer::init
 

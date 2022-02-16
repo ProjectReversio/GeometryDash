@@ -135,8 +135,11 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\CCMenuItemSpriteExtra.cpp" />
+    <ClCompile Include="..\Classes\GameLevelManager.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
+    <ClCompile Include="..\Classes\GJGameLevel.cpp" />
     <ClCompile Include="..\Classes\GJGroundLayer.cpp" />
+    <ClCompile Include="..\Classes\LevelPage.cpp" />
     <ClCompile Include="..\Classes\LevelSelectLayer.cpp" />
     <ClCompile Include="..\Classes\LoadingLayer.cpp" />
     <ClCompile Include="..\Classes\MenuLayer.cpp" />
@@ -148,8 +151,11 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\CCMenuItemSpriteExtra.h" />
     <ClInclude Include="..\Classes\gameConfig.h" />
+    <ClInclude Include="..\Classes\GameLevelManager.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
+    <ClInclude Include="..\Classes\GJGameLevel.h" />
     <ClInclude Include="..\Classes\GJGroundLayer.h" />
+    <ClInclude Include="..\Classes\LevelPage.h" />
     <ClInclude Include="..\Classes\LevelSelectLayer.h" />
     <ClInclude Include="..\Classes\LoadingLayer.h" />
     <ClInclude Include="..\Classes\MenuLayer.h" />

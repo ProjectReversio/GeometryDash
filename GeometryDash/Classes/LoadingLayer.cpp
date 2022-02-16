@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "TextArea.h"
 #include "gameConfig.h"
+#include "GameLevelManager.h"
 #include "MenuLayer.h"
 #include "PlatformToolbox.h"
 
@@ -81,10 +82,9 @@ bool LoadingLayer::init(bool reload)
     if (pGameManager->mShouldLoadLevelSaveData)
     {
         pGameManager->mShouldLoadLevelSaveData = false;
-
-        // TODO: Missing GameLevelManager
-        //GameLevelManager* pLevelManager = GameLevelManager::sharedState();
-        //pLevelManager->getLevelSaveData();
+        
+        GameLevelManager* pLevelManager = GameLevelManager::sharedState();
+        pLevelManager->getLevelSaveData();
     }
 
     CCTextureCache* pTextureCache = CCTextureCache::sharedTextureCache();

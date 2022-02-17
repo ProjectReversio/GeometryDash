@@ -9,6 +9,7 @@
 #include "LevelPage.h"
 #include "MenuLayer.h"
 #include "PlatformToolbox.h"
+#include "gameConfig.h"
 
 USING_NS_CC;
 

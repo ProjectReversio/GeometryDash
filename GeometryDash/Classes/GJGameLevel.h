@@ -14,6 +14,7 @@ public:
     void setLevelID(int id);
     int getLevelID() { return mLevelIDEncrypted - mLevelIDKey; }
 
+    void setDifficulty(int difficulty) { mDifficulty = difficulty; }
     int getDifficulty() { return mDifficulty; }
 
     void setLevelName(std::string name);

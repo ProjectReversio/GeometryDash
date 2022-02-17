@@ -40,11 +40,11 @@ protected:
     float mUnknownFloat1;
     cocos2d::CCLabelBMFont* mNormalPercentText;
     cocos2d::CCLabelBMFont* mPracticePercentText;
-    cocos2d::CCLabelBMFont* mUnknownText3;
+    cocos2d::CCLabelBMFont* mLevelNameText;
     cocos2d::CCLabelBMFont* mUnknownText4;
     cocos2d::CCSprite* mDifficultySprite;
     cocos2d::CCSprite* mStarSprite;
-    cocos2d::CCArray* mUnknownArray3;
+    cocos2d::CCArray* mCoinArray;
     cocos2d::CCArray* mUnknownArray4;
     GJGameLevel* mLevel;
     bool mUnknown1;

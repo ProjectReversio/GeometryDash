@@ -20,7 +20,9 @@ public:
     void unselected() override;
     void useAnimationType(MenuAnimationType type);
     void setSizeMult(float size);
-    
+
+    void setSelectedScale(float scale) { mSelectedScale = scale; }
+
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init(cocos2d::CCNode* normalSprite, cocos2d::CCNode* selectedSprite, cocos2d::CCObject* target, cocos2d::SEL_MenuHandler selector);
 

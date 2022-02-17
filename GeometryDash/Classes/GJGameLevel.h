@@ -11,7 +11,15 @@ public:
     
     bool init() override;
 
+    void setLevelID(int id);
+    int getLevelID() { return mLevelIDEncrypted - mLevelIDKey; }
+
     CREATE_FUNC(GJGameLevel);
+
+protected:
+    int mLevelIDEncrypted;
+    int mLevelIDKey;
+    int mLevelID;
 };
 
 #endif // __GJGAMELEVEL_H__

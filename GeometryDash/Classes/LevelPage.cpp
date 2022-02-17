@@ -8,12 +8,26 @@ USING_NS_CC;
 
 LevelPage::LevelPage()
 {
-    
+    mUnknown1 = false;
+    mLevel = nullptr;
+    mMenu = nullptr;
+    mUnknownSize1 = CCSize();
+    mSecretCoin = nullptr;
+    mSecretDoor = nullptr;
 }
 
 LevelPage::~LevelPage()
 {
-    
+    if (mLevel)
+        mLevel->release();
+    if (mUnknownArray4)
+        mUnknownArray4->release();
+    if (mUnknownArray1)
+        mUnknownArray1->release();
+    if (mUnknownArray3)
+        mUnknownArray3->release();
+    if (mUnknownArray2)
+        mUnknownArray2->release();
 }
 
 LevelPage* LevelPage::create(GJGameLevel* level)
@@ -122,17 +136,17 @@ bool LevelPage::init(GJGameLevel* level)
 
     // --------------------------------------------------------------------------------
 
-    mUnknownText1 = CCLabelBMFont::create(" ", "bigFont.fnt");
-    this->addChild(mUnknownText1, 4);
-    mUnknownText1->setPosition(pBarNormalSprite->getPosition());
-    mUnknownText1->setScale(0.5f);
-    mUnknownArray1->addObject(mUnknownText1);
+    mNormalPercentText = CCLabelBMFont::create(" ", "bigFont.fnt");
+    this->addChild(mNormalPercentText, 4);
+    mNormalPercentText->setPosition(pBarNormalSprite->getPosition());
+    mNormalPercentText->setScale(0.5f);
+    mUnknownArray1->addObject(mNormalPercentText);
     
-    mUnknownText2 = CCLabelBMFont::create(" ", "bigFont.fnt");
-    this->addChild(mUnknownText2, 4);
-    mUnknownText2->setPosition(pBarPracticeSprite->getPosition());
-    mUnknownText2->setScale(0.5f);
-    mUnknownArray1->addObject(mUnknownText2);
+    mPracticePercentText = CCLabelBMFont::create(" ", "bigFont.fnt");
+    this->addChild(mPracticePercentText, 4);
+    mPracticePercentText->setPosition(pBarPracticeSprite->getPosition());
+    mPracticePercentText->setScale(0.5f);
+    mUnknownArray1->addObject(mPracticePercentText);
     
     CCLabelBMFont* normalText = CCLabelBMFont::create("Normal Mode", "bigFont.fnt");
     this->addChild(normalText, 4);
@@ -198,6 +212,54 @@ bool LevelPage::init(GJGameLevel* level)
 
 void LevelPage::updateDynamicPage(GJGameLevel* level)
 {
+    if (mUnknown1)
+        return;
+
+    if (mLevel)
+    {
+        if (mLevel->getLevelID() == level->getLevelID())
+            return;
+        mLevel->release();
+        mLevel = nullptr;
+    }
+
+    for (int i = 0; ; i++)
+    {
+        if (i >= mUnknownArray4->count())
+            break;
+
+        CCNode* node = (CCNode*) mUnknownArray4->objectAtIndex(i);
+        node->removeFromParent();
+    }
+
+    mUnknownArray4->removeAllObjects();
+    mSecretDoor = nullptr;
+    mLevel = level;
+    mLevel->retain();
+
+    if (mLevel->getLevelID() == -1)
+    {
+        CCDirector* pDirector = CCDirector::sharedDirector();
+        CCSize winSize = pDirector->getWinSize();
+        for (int i = 0; i < mUnknownArray1->count(); i++)
+        {
+            CCNode* node = (CCNode*)mUnknownArray1->objectAtIndex(i);
+            node->setVisible(false);
+        }
+
+        CCLabelBMFont* comingSoonText = CCLabelBMFont::create("Coming Soon!", "bigFont.fnt");
+        this->addChild(comingSoonText);
+        comingSoonText->setPosition(CCPoint(winSize.width * 0.5f, winSize.height * 0.5f + 50.0f));
+
+        mUnknownArray4->addObject(comingSoonText);
+        this->addSecretDoor();
+
+    }
+    else
+    {
+        // TODO: Implement LevelPage::updateDynamicPage
+    }
+
     // TODO: Implement LevelPage::updateDynamicPage
 
     CCRect diffRect = mDifficultySprite->getTextureRect();
@@ -209,6 +271,13 @@ void LevelPage::updateDynamicPage(GJGameLevel* level)
     mDifficultySprite->setPosition(CCPoint(mUnknownSize1.width * 0.5f - (float)((float)((float)(diffX + (float)((float)(unknownText3ContentWidth * unknownText3Scale) + 5.0)) + 30.0) * 0.5), mUnknownSize1.height * 0.5f + 3.0f));
 
     // TODO: Implement LevelPage::updateDynamicPage
+
+    mUnknown1 = false;
+}
+
+void LevelPage::addSecretDoor()
+{
+    // TODO: Implement LevelPage::addSecretDoor
 }
 
 void LevelPage::onPlay(cocos2d::CCObject* pSender)

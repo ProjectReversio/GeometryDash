@@ -15,7 +15,7 @@ public:
 
     CREATE_FUNC(ExtendedLayer);
 
-protected:
+public:
     void* mUnknown3;
 };
 

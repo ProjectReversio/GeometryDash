@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+class ExtendedLayer;
+
 struct DynamicScrollDelegate
 {
 public:
@@ -30,8 +32,10 @@ public:
     static BoomScrollLayer* create(cocos2d::CCArray* a1, int a2, bool a3, cocos2d::CCArray* a4, DynamicScrollDelegate* scroll);
     static BoomScrollLayer* create(cocos2d::CCArray* a1, int a2, bool a3);
 
+public:
+    ExtendedLayer* mUnknown1;
+
 protected:
-    cocos2d::CCLayer* mUnknown1;
     bool mUnknown2;
     float mUnknownFloat1;
     float mUnknownFloat2;

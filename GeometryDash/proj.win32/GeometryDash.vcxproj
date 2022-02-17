@@ -139,6 +139,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClCompile Include="..\Classes\ExtendedLayer.cpp" />
     <ClCompile Include="..\Classes\GameLevelManager.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
+    <ClCompile Include="..\Classes\GameObject.cpp" />
     <ClCompile Include="..\Classes\GJGameLevel.cpp" />
     <ClCompile Include="..\Classes\GJGroundLayer.cpp" />
     <ClCompile Include="..\Classes\LevelPage.cpp" />
@@ -157,6 +158,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClInclude Include="..\Classes\gameConfig.h" />
     <ClInclude Include="..\Classes\GameLevelManager.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
+    <ClInclude Include="..\Classes\GameObject.h" />
     <ClInclude Include="..\Classes\GJGameLevel.h" />
     <ClInclude Include="..\Classes\GJGroundLayer.h" />
     <ClInclude Include="..\Classes\LevelPage.h" />

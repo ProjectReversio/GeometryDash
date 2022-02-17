@@ -2,6 +2,7 @@
 
 #include "AppDelegate.h"
 #include "CCMenuItemSpriteExtra.h"
+#include "ExtendedLayer.h"
 #include "GameLevelManager.h"
 #include "GameManager.h"
 #include "GJGroundLayer.h"
@@ -10,6 +11,23 @@
 #include "PlatformToolbox.h"
 
 USING_NS_CC;
+
+#if defined(GD_SUBZERO)
+#define LEVEL_INDEX_START 4001
+#define LEVEL_INDEX_END 4004
+#elif defined(GD_MELTDOWN)
+#define LEVEL_INDEX_START 1001
+#define LEVEL_INDEX_END 1004
+#elif defined(GD_WORLD)
+#define LEVEL_INDEX_START 2001
+#define LEVEL_INDEX_END 2011
+#elif defined(GD_LITE)
+#define LEVEL_INDEX_START 1
+#define LEVEL_INDEX_END 15
+#else
+#define LEVEL_INDEX_START 1
+#define LEVEL_INDEX_END 22
+#endif
 
 LevelSelectLayer::LevelSelectLayer()
 {
@@ -118,14 +136,24 @@ bool LevelSelectLayer::init(int page)
     CCArray* levelArray = CCArray::create();
     CCArray* pageArray = CCArray::create();
 
-    int index = 4001;
+    int index = LEVEL_INDEX_START;
 
     GameLevelManager* pLevelManager = GameLevelManager::sharedState();
     
     do
     {
+#ifdef GD_LITE
+        int index2;
+        if (index == 14)
+            index2 = 15;
+        else
+            index2 = index;
+        index++;
+        levelArray->addObject(pLevelManager->getMainLevel(index2, true));
+#else
         levelArray->addObject(pLevelManager->getMainLevel(index++, true));
-    } while(index != 4004);
+#endif
+    } while(index != LEVEL_INDEX_END);
 
     int index2 = 3;
     do
@@ -136,7 +164,7 @@ bool LevelSelectLayer::init(int page)
     } while (index2 > 0);
     
     GJGameLevel* level = GJGameLevel::create();
-    // TODO: Implement LevelSelectLayer::init
+    level->setLevelID(-1);
     levelArray->addObject(level);
 
     this->mBoomScrollLayer = BoomScrollLayer::create(pageArray, 0, true, levelArray, this);
@@ -146,15 +174,20 @@ bool LevelSelectLayer::init(int page)
 
     this->mUnknown1 = winSize.width;
 
-    // TODO: Implement LevelSelectLayer::init
+    mBoomScrollLayer->mUnknown1->mUnknown3 = this;
 
     if (page == 0)
     {
         this->scrollLayerMoved(CCPoint());
     }
-    else if (page == 3)
+    else if (page == (LEVEL_INDEX_END - LEVEL_INDEX_START))
     {
-        mBoomScrollLayer->instantMoveToPage(2);
+        mBoomScrollLayer->instantMoveToPage((LEVEL_INDEX_END - LEVEL_INDEX_START) - 1);
+
+#ifdef GD_MELTDOWN
+        // Why does meltdown do this?
+        mBoomScrollLayer->instantMoveToPage((LEVEL_INDEX_END - LEVEL_INDEX_START));
+#endif
     }
     else
     {

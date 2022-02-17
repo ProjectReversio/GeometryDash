@@ -205,7 +205,10 @@ bool LevelPage::init(GJGameLevel* level)
 
     if (PlatformToolbox::isControllerConnected())
     {
-        // TODO: Implement LevelPage::init
+        CCSprite* controllerStartBtn = CCSprite::createWithSpriteFrameName("controllerBtn_Start_001.png");
+        sp->addChild(controllerStartBtn, 10);
+        controllerStartBtn->setPosition(mLevelInfoBox->getPosition() + CCPoint(0.0f, -35.0f));
+        mUnknownArray2->addObject(controllerStartBtn);
     }
 
     return true;

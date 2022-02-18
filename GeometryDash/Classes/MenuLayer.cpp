@@ -383,7 +383,9 @@ void MenuLayer::onPlay(cocos2d::CCObject* pSender)
 
     CCDirector* pDirector = CCDirector::sharedDirector();
 #ifdef GD_WORLD
-    CCScene* levelSelect = WorldSelectLayer::scene(0);
+    // TODO: missing WorldSelectLayer
+    //CCScene* levelSelect = WorldSelectLayer::scene(0);
+    CCScene* levelSelect = LevelSelectLayer::scene(0);
 #else
     CCScene* levelSelect = LevelSelectLayer::scene(0);
 #endif

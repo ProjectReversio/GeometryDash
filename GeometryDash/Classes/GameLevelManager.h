@@ -13,12 +13,17 @@ public:
     bool init() override;
 
     void getLevelSaveData();
+    void firstSetup();
+    void setMainLevels(cocos2d::CCDictionary* dictionary);
     GJGameLevel* getMainLevel(int levelId, bool someBool);
+
+    const char* getLevelKey(int levelId);
 
     static GameLevelManager* sharedState();
 
 protected:
-
+    cocos2d::CCDictionary* mUnknownDictionary;
+    cocos2d::CCString* mUnknownStr;
 };
 
 #endif // __GAMELEVELMANAGER_H__

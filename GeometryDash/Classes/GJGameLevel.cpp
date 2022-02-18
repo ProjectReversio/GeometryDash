@@ -12,17 +12,24 @@ GJGameLevel::GJGameLevel()
     mLevelName = "";
 
     mDifficulty = 0;
+    mSongID = 0;
 
     mNormalPercent = 0;
     mNormalPercentKey = 0;
     mNormalPercentEncrypted = 0;
     mPracticePercent = 0;
 
+    mDemon = 0;
+    mDemonKey = 0;
+    mDemonEncrypted = 0;
+
     mStars = 0;
     mStarsKey = 0;
     mStarsEncrypted = 0;
 
     mCoinsRequired = 0;
+
+    mCapacityString = "";
 }
 
 GJGameLevel::~GJGameLevel()
@@ -87,6 +94,18 @@ void GJGameLevel::setStars(int stars)
 int GJGameLevel::getStars()
 {
     return mStarsEncrypted - mStarsKey;
+}
+
+void GJGameLevel::setDemon(int demon)
+{
+    mDemon = demon;
+    mDemonKey = GEN_LEVEL_KEY();
+    mDemonEncrypted = mDemon + mDemonKey;
+}
+
+int GJGameLevel::getDemon()
+{
+    return mDemonEncrypted - mDemonKey;
 }
 
 int GJGameLevel::getCoinKey(int index)

@@ -144,6 +144,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClCompile Include="..\Classes\GJGroundLayer.cpp" />
     <ClCompile Include="..\Classes\LevelPage.cpp" />
     <ClCompile Include="..\Classes\LevelSelectLayer.cpp" />
+    <ClCompile Include="..\Classes\LevelTools.cpp" />
     <ClCompile Include="..\Classes\LoadingLayer.cpp" />
     <ClCompile Include="..\Classes\MenuLayer.cpp" />
     <ClCompile Include="..\Classes\PlatformToolbox.cpp" />
@@ -163,6 +164,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClInclude Include="..\Classes\GJGroundLayer.h" />
     <ClInclude Include="..\Classes\LevelPage.h" />
     <ClInclude Include="..\Classes\LevelSelectLayer.h" />
+    <ClInclude Include="..\Classes\LevelTools.h" />
     <ClInclude Include="..\Classes\LoadingLayer.h" />
     <ClInclude Include="..\Classes\MenuLayer.h" />
     <ClInclude Include="..\Classes\PlatformToolbox.h" />

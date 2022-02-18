@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 #include "AppDelegate.h"
+#include "GameLevelManager.h"
 
 USING_NS_CC;
 
@@ -30,9 +31,21 @@ GameManager::~GameManager()
 
 bool GameManager::init()
 {
-    // TODO: Implement
+    // TODO: Implement GameManager::init
+    // TEMP: firstLoad is not normally called here, but it ends up being called by GManager::setup anyway
+    this->firstLoad();
+    // TODO: Implement GameManager::init
 
     return true;
+}
+
+void GameManager::firstLoad()
+{
+    // TODO: Implement GameManager::firstLoad
+
+    GameLevelManager::sharedState()->firstSetup();
+
+    // TODO: Implement GameManager::firstLoad
 }
 
 const char* GameManager::getBGTexture(int index)

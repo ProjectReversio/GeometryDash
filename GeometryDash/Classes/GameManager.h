@@ -12,6 +12,8 @@ public:
 
     bool init() override;
 
+    void firstLoad();
+
     const char* getBGTexture(int index);
     void loadBackground(int index);
 

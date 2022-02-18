@@ -27,7 +27,20 @@ public:
     void setStars(int stars);
     int getStars();
 
+    void setDemon(int demon);
+    int getDemon();
+
+    void setCoinsRequired(int amount) { mCoinsRequired = amount; }
     int getCoinsRequired() { return mCoinsRequired; }
+
+    void setSongID(int songId) { mSongID = songId; }
+    int getSongID() { return mSongID; }
+
+    void setCapacityString(std::string capacityString) { mCapacityString = capacityString; }
+    std::string getCapacityString() { return mCapacityString; }
+
+    void setLevelString(std::string levelString) { mLevelString = levelString; }
+    std::string getLevelString() { return mLevelString; }
 
     int getCoinKey(int index);
 
@@ -38,6 +51,8 @@ protected:
     int mLevelIDKey;
     int mLevelID;
     std::string mLevelName;
+    std::string mLevelString;
+    std::string mCapacityString;
 
     int mDifficulty;
 
@@ -52,6 +67,12 @@ protected:
     int mStarsEncrypted;
 
     int mCoinsRequired;
+
+    int mSongID;
+
+    int mDemon;
+    int mDemonKey;
+    int mDemonEncrypted;
 };
 
 #endif // __GJGAMELEVEL_H__

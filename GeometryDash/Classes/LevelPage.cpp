@@ -327,7 +327,7 @@ void LevelPage::updateDynamicPage(GJGameLevel* level)
         float unknownText3ContentWidth = mLevelNameText->getContentSize().width;
         float unknownText3Scale = mLevelNameText->getScale();
 
-        mDifficultySprite->setPosition(CCPoint(mUnknownSize1.width * 0.5f - (float)((float)((float)(diffX + (float)((float)(unknownText3ContentWidth * unknownText3Scale) + 5.0)) + 30.0) * 0.5), mUnknownSize1.height * 0.5f + 3.0f));
+        mDifficultySprite->setPosition(CCPoint((mUnknownSize1.width * 0.5f - (float)((float)((float)(diffX + (float)((float)(unknownText3ContentWidth * unknownText3Scale) + 5.0)) + 30.0) * 0.5)) + diffX, mUnknownSize1.height * 0.5f + 3.0f));
 
         mLevelNameText->setPosition(CCPoint(mDifficultySprite->getPosition().x + 30.0f, mUnknownSize1.height * 0.5f + 3.0f));
 

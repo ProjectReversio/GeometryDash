@@ -2,8 +2,9 @@
 #define __GAMEMANAGER_H__
 
 #include "cocos2d.h"
+#include "GManager.h"
 
-class GameManager : public cocos2d::CCNode
+class GameManager : public cocos2d::CCNode, GManager
 {
     friend class AppDelegate;
 public:

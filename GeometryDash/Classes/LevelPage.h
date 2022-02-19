@@ -26,8 +26,12 @@ public:
     void addSecretDoor();
 
     void onPlay(cocos2d::CCObject* pSender);
+    void playStep2();
+    void playStep3();
 
     static LevelPage* create(GJGameLevel* level);
+    
+    static bool s_didClick;
 
 protected:
     cocos2d::CCSize mUnknownSize1;

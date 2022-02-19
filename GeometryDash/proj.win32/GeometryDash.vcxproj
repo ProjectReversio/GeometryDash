@@ -140,6 +140,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClCompile Include="..\Classes\GameLevelManager.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
+    <ClCompile Include="..\Classes\GJBaseGameLayer.cpp" />
     <ClCompile Include="..\Classes\GJGameLevel.cpp" />
     <ClCompile Include="..\Classes\GJGroundLayer.cpp" />
     <ClCompile Include="..\Classes\GManager.cpp" />
@@ -149,6 +150,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClCompile Include="..\Classes\LoadingLayer.cpp" />
     <ClCompile Include="..\Classes\MenuLayer.cpp" />
     <ClCompile Include="..\Classes\PlatformToolbox.cpp" />
+    <ClCompile Include="..\Classes\PlayLayer.cpp" />
     <ClCompile Include="..\Classes\TextArea.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -161,6 +163,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClInclude Include="..\Classes\GameLevelManager.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\GameObject.h" />
+    <ClInclude Include="..\Classes\GJBaseGameLayer.h" />
     <ClInclude Include="..\Classes\GJGameLevel.h" />
     <ClInclude Include="..\Classes\GJGroundLayer.h" />
     <ClInclude Include="..\Classes\GManager.h" />
@@ -170,6 +173,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\lib\cocos2d-x\external\libwebsockets\win32\lib\*
     <ClInclude Include="..\Classes\LoadingLayer.h" />
     <ClInclude Include="..\Classes\MenuLayer.h" />
     <ClInclude Include="..\Classes\PlatformToolbox.h" />
+    <ClInclude Include="..\Classes\PlayLayer.h" />
     <ClInclude Include="..\Classes\TextArea.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

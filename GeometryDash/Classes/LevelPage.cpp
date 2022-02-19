@@ -1,11 +1,15 @@
 #include "LevelPage.h"
 
 #include "CCMenuItemSpriteExtra.h"
+#include "GameManager.h"
 #include "GameObject.h"
 #include "PlatformToolbox.h"
+#include "PlayLayer.h"
 #include "GUI/CCControlExtension/CCScale9Sprite.h"
 
 USING_NS_CC;
+
+bool LevelPage::s_didClick = false;
 
 LevelPage::LevelPage()
 {
@@ -411,5 +415,65 @@ void LevelPage::addSecretDoor()
 
 void LevelPage::onPlay(cocos2d::CCObject* pSender)
 {
-    // TODO: Implement LevelPage::onPlay
+    if (mLevel->getLevelID() != -1)
+    {
+        // TODO: Missing GameStatsManager
+        //GameStatsManager* pStatsManager = GameStatsManager::sharedState();
+        //int totalCoins = pStatsManager->getStat("8");
+        int totalCoins = 0;
+
+        int requiredCoins = mLevel->getCoinsRequired();
+        if (requiredCoins <= totalCoins)
+        {
+            if (!mUnknown1)
+            {
+                mUnknown1 = true;
+                LevelPage::s_didClick = true;
+
+                // TODO: Missing GameSoundManager
+                //GameSoundManager* pGameSoundManager = GameSoundManager::sharedManager();
+                //pGameSoundManager->stopBackgroundMusic();
+                //pGameSoundManager->playEffect("playSound_01.ogg", 1.0f, 0.0f, 0.3f);
+
+                CCDelayTime* delay = CCDelayTime::create(0.0f);
+                CCCallFunc* func = CCCallFunc::create(this, callfunc_selector(LevelPage::playStep2));
+                CCSequence* seq = CCSequence::create(delay, func, nullptr);
+                this->runAction(seq);
+            }
+        } else
+        {
+            CCString* s = CCString::createWithFormat("Collect %i more <cy>Secret Coins</c> to unlock this <cl>level</c>!", requiredCoins - totalCoins);
+
+            // TODO: Missing FLAlertLayer
+            //FLAlertLayer* alert = FLAlertLayer::create(nullptr, "Locked", s->getCString(), "OK", nullptr, 300.0f);
+            //alert->show();
+        }
+    }
+}
+
+void LevelPage::playStep2()
+{
+    // TODO: Missing GameSoundManager
+    //GameSoundManager* pGameSoundManager = GameSoundManager::sharedManager();
+    //pGameSoundManager->playBackgroundMusic(mLevel->getAudioFilename(), false, true);
+
+    CCDelayTime* delay = CCDelayTime::create(0.0f);
+    CCCallFunc* func = CCCallFunc::create(this, callfunc_selector(LevelPage::playStep3));
+    CCSequence* seq = CCSequence::create(delay, func, nullptr);
+    this->runAction(seq);
+}
+
+void LevelPage::playStep3()
+{
+    GameManager* pGameManager = GameManager::sharedState();
+    pGameManager->mUnknownInt1 = 9;
+
+    // TODO: Missing LocalLevelManager
+    //LocalLevelManager* pLocalLevelManager = LocalLevelManager::sharedState();
+    //mLevel->setLevelString(pLocalLevelManager->getMainLevelString(mLevel->getLevelID()));
+
+    CCDirector* pDirector = CCDirector::sharedDirector();
+    CCScene* playScene = PlayLayer::scene(mLevel);
+    CCTransitionFade* fade = CCTransitionFade::create(0.5f, playScene);
+    pDirector->replaceScene(fade);
 }

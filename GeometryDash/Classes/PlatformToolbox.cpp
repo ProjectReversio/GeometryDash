@@ -18,3 +18,8 @@ void PlatformToolbox::activateGameCenter()
 {
     // TODO: Implement PlatformToolbox::activateGameCenter
 }
+
+void PlatformToolbox::hideCursor()
+{
+    // TODO: Implement PlatformToolbox::hideCursor
+}

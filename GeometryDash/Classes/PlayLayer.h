@@ -12,6 +12,11 @@ public:
     ~PlayLayer() override;
 
     virtual bool init(GJGameLevel* level);
+    void update(float delta) override;
+
+    void removeAllObjects();
+    void onQuit();
+    void setDamageVerifiedIdx(int damage);
 
     static cocos2d::CCScene* scene(GJGameLevel* level);
 

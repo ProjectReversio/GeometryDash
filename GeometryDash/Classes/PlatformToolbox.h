@@ -9,6 +9,7 @@ public:
     static bool isControllerConnected();
     static bool isLowMemoryDevice();
     static void activateGameCenter();
+    static void hideCursor();
 };
 
 #endif // __PLATFORMTOOLBOX_H__

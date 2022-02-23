@@ -6,6 +6,12 @@
 
 USING_NS_CC;
 
+float PlayLayer::smScreenRight = 0;
+float PlayLayer::smScreenLeft = 0;
+float PlayLayer::smScreenTop = 0;
+float PlayLayer::smScreenBottom = 0;
+float PlayLayer::smScreenRightHalf = 0;
+
 PlayLayer::PlayLayer()
 {
     
@@ -68,6 +74,66 @@ bool PlayLayer::init(GJGameLevel* level)
 
     this->setDamageVerifiedIdx(0);
 
+    mUnknownNew1 = false;
+    mUnknownNew2 = pGameManager->getGameVariable("0081");
+    mUnknownNew3 = pGameManager->getGameVariable("0095");
+    mUnknownNew5 = pGameManager->getGameVariable("0099");
+    pGameManager->mUnknownBool6 = true;
+    mUnknownNew4 = pGameManager->mUnknownBool5;
+    pGameManager->mUnknownBool5 = false;
+
+    if (pGameManager->mUnknown4)
+        this->stopRecording();
+
+    // TODO: Missing AdToolbox
+    //AdToolbox::cacheInterstitial();
+
+    mUnknownNew8 = false;
+
+    PlayLayer::smScreenRight = pDirector->getScreenRight();
+    PlayLayer::smScreenLeft = pDirector->getScreenLeft();
+    PlayLayer::smScreenTop = pDirector->getScreenTop();
+    PlayLayer::smScreenBottom = pDirector->getScreenBottom();
+    PlayLayer::smScreenRightHalf = pDirector->getScreenRight() * 0.5f;
+
+    mUnknownNew6 = level->mUnknown7 == 2;
+    mUnknownNew7 = false;
+
+    CCPoint somePoint = mUnknownNew11;
+
+    mUnknown34 = 1;
+    mUnknownNew11 = CCPoint(0.0f, 105.0f);
+
+    mUnknownNew12 = 0;
+    mUnknownNew16 = 0;
+    mUnknownNew20 = 0;
+    mUnknownNew21 = 0;
+    mUnknownNew13 = 0;
+    mUnknownNew14 = 0;
+    mUnknownNew19 = false;
+    mUnknownNew10 = true;
+
+    mUnknownBool7 = false;
+
+    mUnknownNew22 = 4;
+
+    AppDelegate* pApp = AppDelegate::get();
+    if (pApp->isLowMemoryDevice() || pApp->usesLowQualityTextures())
+        mUnknownNew22 = 2;
+    mUnknownNew23 = 40;
+    if (pApp->isLowMemoryDevice() || pApp->usesLowQualityTextures())
+        mUnknownNew23 = 10;
+    mUnknownNew24 = CCArray::create();
+    mUnknownNew24->retain();
+
+    int index = 0;
+    while (index < mUnknownNew22)
+    {
+        index++;
+        // TODO: Missing GravityEffectSprite
+        //mUnknownNew24->addObject(GravityEffectSprite::create());
+    }
+
     // TODO: Implement PlayLayer::init
 
     if (this->shouldExitHackedLevel())
@@ -97,4 +163,9 @@ void PlayLayer::onQuit()
 void PlayLayer::setDamageVerifiedIdx(int damage)
 {
     // TODO: Implement PlayLayer::setDamageVerifiedIdx
+}
+
+void PlayLayer::stopRecording()
+{
+    // TODO: Implement PlayLayer::stopRecording
 }

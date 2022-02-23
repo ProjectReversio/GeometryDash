@@ -46,6 +46,9 @@ public:
 
     CREATE_FUNC(GJGameLevel);
 
+public:
+    int mUnknown7;
+
 protected:
     int mLevelIDEncrypted;
     int mLevelIDKey;

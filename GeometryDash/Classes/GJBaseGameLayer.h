@@ -31,6 +31,8 @@ protected:
     std::vector<cocos2d::CCArray*> mArrVec1;
     std::vector<cocos2d::CCArray*> mArrVec2;
     std::vector<cocos2d::CCArray*> mArrVec3;
+    int mUnknown34;
+    bool mUnknownBool7;
 };
 
 #endif // __GJBASEGAMELAYER_H__

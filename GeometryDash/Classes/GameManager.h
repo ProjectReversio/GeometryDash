@@ -43,6 +43,8 @@ public:
     bool mUsedGarageButton;
     bool mShouldLoadLevelSaveData;
     bool mUnknownBool2;
+    bool mUnknownBool5;
+    bool mUnknownBool6;
     bool mUsedCreatorButton;
     cocos2d::CCLayer* mCurrentMenu;
     int mGroundTexture;

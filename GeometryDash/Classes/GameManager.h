@@ -48,6 +48,10 @@ public:
     bool mUsedCreatorButton;
     cocos2d::CCLayer* mCurrentMenu;
     int mGroundTexture;
+    int mUnknownNew100;
+    int mUnknownNew101;
+    int mUnknownNew103;
+    int mUnknownNew104;
 };
 
 #endif // __GAMEMANAGER_H__

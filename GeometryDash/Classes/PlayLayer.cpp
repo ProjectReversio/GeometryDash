@@ -3,6 +3,7 @@
 #include "AppDelegate.h"
 #include "GameManager.h"
 #include "PlatformToolbox.h"
+#include "support/zip_support/ZipUtils.h"
 
 USING_NS_CC;
 
@@ -134,6 +135,54 @@ bool PlayLayer::init(GJGameLevel* level)
         //mUnknownNew24->addObject(GravityEffectSprite::create());
     }
 
+    mUnknownNew25 = CCArray::create();
+    mUnknownNew25->retain();
+
+    // TODO: Implement PlayLayer::init
+
+    mLevel = level;
+    mLevel->retain();
+
+    // TODO: Implement PlayLayer::init
+
+    CCSize winSize = pDirector->getWinSize();
+
+    // TODO: Implement PlayLayer::init
+
+    mUnknownNew29 = CCDrawNode::create();
+    this->addChild(mUnknownNew29, 10);
+
+    // TODO: Implement PlayLayer::init
+
+    mUnknownNew33 = CCNode::create();
+    this->addChild(mUnknownNew33);
+    mUnknownNew33->setVisible(false);
+
+    this->setupLayers();
+
+    // TODO: Implement PlayLayer::init
+
+    mPlayerObject = PlayerObject::create(
+        pGameManager->mUnknownNew100 - pGameManager->mUnknownNew101,
+        pGameManager->mUnknownNew103 - pGameManager->mUnknownNew104,
+        nullptr);
+
+    // TODO: Implement PlayLayer::init
+
+    mPlayObject = PlayerObject::create(
+        pGameManager->mUnknownNew100 - pGameManager->mUnknownNew101,
+        pGameManager->mUnknownNew103 - pGameManager->mUnknownNew104,
+        nullptr);
+
+    // TODO: Implement PlayLayer::init
+
+    mPlayObject->retain();
+
+    // TODO: Implement PlayLayer::init
+
+    // TODO: Missing cocos2d::ZipUtils::decompressString
+    //std::string levelString = ZipUtils::decompressString(mLevel->getLevelString(), 0, 11);
+    
     // TODO: Implement PlayLayer::init
 
     if (this->shouldExitHackedLevel())

@@ -50,7 +50,11 @@ protected:
     int mUnknownNew22;
     int mUnknownNew23;
     cocos2d::CCArray* mUnknownNew24;
+    cocos2d::CCArray* mUnknownNew25;
     cocos2d::CCPoint mUnknownNew11;
+    GJGameLevel* mLevel;
+    cocos2d::CCDrawNode* mUnknownNew29;
+    cocos2d::CCNode* mUnknownNew33;
 };
 
 #endif // __PLAYLAYER_H__

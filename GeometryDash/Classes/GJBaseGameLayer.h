@@ -2,6 +2,7 @@
 #define __GJBASEGAMELAYER_H__
 
 #include "cocos2d.h"
+#include "PlayerObject.h"
 
 class GJBaseGameLayer : public cocos2d::CCLayer
 {
@@ -10,6 +11,8 @@ public:
     ~GJBaseGameLayer() override;
 
     bool init() override;
+
+    void setupLayers();
 
     bool shouldExitHackedLevel();
 
@@ -33,6 +36,8 @@ protected:
     std::vector<cocos2d::CCArray*> mArrVec3;
     int mUnknown34;
     bool mUnknownBool7;
+    PlayerObject* mPlayerObject;
+    PlayerObject* mPlayObject;
 };
 
 #endif // __GJBASEGAMELAYER_H__

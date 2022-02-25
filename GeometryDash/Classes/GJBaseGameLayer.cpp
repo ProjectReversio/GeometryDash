@@ -89,6 +89,11 @@ bool GJBaseGameLayer::init()
     return true;
 }
 
+void GJBaseGameLayer::setupLayers()
+{
+    // TODO: Implement GJBaseGameLayer::setupLayers
+}
+
 bool GJBaseGameLayer::shouldExitHackedLevel()
 {
     // TODO: Implement GJBaseGameLayer::shouldExitHackedLevel

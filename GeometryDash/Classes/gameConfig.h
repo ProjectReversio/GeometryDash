@@ -12,4 +12,6 @@
 //#define PLATFORM_MOBILE
 #define PLATFORM_DESKTOP
 
+//#define GD_PRE22MENUS
+
 #endif // __GAMECONFIG_H__

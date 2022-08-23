@@ -213,7 +213,11 @@ bool MenuLayer::init()
     CCSprite* robtopLogo = CCSprite::createWithSpriteFrameName("robtoplogo_small.png");
     robtopLogo->setScale(0.8f);
     CCMenuItemSpriteExtra* robtopExtra = CCMenuItemSpriteExtra::create(robtopLogo, nullptr, this, menu_selector(MenuLayer::onRobTop));
+#ifdef GD_PRE22MENUS
     robtopExtra->setSizeMult(1.5f);
+#else
+    robtopExtra->setSizeMult(1.1f);
+#endif
 
     CCMenu* socialsMenu = CCMenu::create(robtopExtra, nullptr);
     this->addChild(socialsMenu, 2);
@@ -237,9 +241,27 @@ bool MenuLayer::init()
     youtubeExtra->setSizeMult(1.5f);
     socialsMenu->addChild(youtubeExtra);
 
+#ifndef GD_PRE22MENUS
+    CCSprite* twitchIcon = CCSprite::createWithSpriteFrameName("gj_twitchIcon_001.png");
+    twitchIcon->setScale(0.8f);
+    CCMenuItemSpriteExtra* twitchExtra = CCMenuItemSpriteExtra::create(twitchIcon, nullptr, this, menu_selector(MenuLayer::onTwitch));
+    twitchExtra->setSizeMult(1.5f);
+    socialsMenu->addChild(twitchExtra);
+
+    CCSprite* discordIcon = CCSprite::createWithSpriteFrameName("gj_discordIcon_001.png");
+    discordIcon->setScale(0.8f);
+    CCMenuItemSpriteExtra* discordExtra = CCMenuItemSpriteExtra::create(discordIcon, nullptr, this, menu_selector(MenuLayer::onDiscord));
+    discordExtra->setSizeMult(1.5f);
+    socialsMenu->addChild(discordExtra);
+#endif
+
     facebookExtra->setPosition(socialsMenu->convertToNodeSpace(CCPoint(pDirector->getScreenLeft() + 22.0f, pDirector->getScreenBottom() + 30.0f + 25.0f)));
     twitterExtra->setPosition(facebookExtra->getPosition() + CCPoint(30.0f, 0.0f));
     youtubeExtra->setPosition(twitterExtra->getPosition() + CCPoint(30.0f, 0.0f));
+#ifndef GD_PRE22MENUS
+    twitchExtra->setPosition(youtubeExtra->getPosition() + CCPoint(29.0f, 0.0f));
+    discordExtra->setPosition(youtubeExtra->getPosition() + CCPoint(29.0f, -29.0f));
+#endif
 
     // ----------------------------------------------------------------------------------------------
     // Extra Menu
@@ -464,6 +486,16 @@ void MenuLayer::onTwitter(cocos2d::CCObject* pSender)
 void MenuLayer::onYouTube(cocos2d::CCObject* pSender)
 {
     // TODO: Implement MenuLayer::onYouTube
+}
+
+void MenuLayer::onTwitch(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onTwitch
+}
+
+void MenuLayer::onDiscord(cocos2d::CCObject* pSender)
+{
+    // TODO: Implement MenuLayer::onDiscord
 }
 
 void MenuLayer::onMoreGames(cocos2d::CCObject* pSender)

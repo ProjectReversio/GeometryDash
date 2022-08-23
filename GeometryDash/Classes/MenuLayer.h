@@ -33,6 +33,8 @@ public:
     void onFacebook(cocos2d::CCObject* pSender);
     void onTwitter(cocos2d::CCObject* pSender);
     void onYouTube(cocos2d::CCObject* pSender);
+    void onTwitch(cocos2d::CCObject* pSender);
+    void onDiscord(cocos2d::CCObject* pSender);
     void onMoreGames(cocos2d::CCObject* pSender);
     void onFreeLevels(cocos2d::CCObject* pSender);
     void onFullVersion(cocos2d::CCObject* pSender);

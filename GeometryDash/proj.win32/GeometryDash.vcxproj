@@ -73,7 +73,6 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\lib\cocos2d-x\cocos2dx;$(ProjectDir)..\..\lib\cocos2d-x\cocos2dx\include;$(ProjectDir)..\..\lib\cocos2d-x\cocos2dx\kazmath\include;$(ProjectDir)..\..\lib\cocos2d-x\cocos2dx\platform\win32;$(ProjectDir)..\..\lib\cocos2d-x\cocos2dx\platform\third_party\win32;$(ProjectDir)..\..\lib\cocos2d-x\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\lib\cocos2d-x\external;$(ProjectDir)..\..\lib\cocos2d-x\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\lib\cocos2d-x\CocosDenshion\include;$(ProjectDir)..\..\lib\cocos2d-x\extensions;..\Classes;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -81,6 +80,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libExtensions.lib;libcocos2d.lib;libCocosDenshion.lib;opengl32.lib;glew32.lib;libBox2d.lib;libchipmunk.lib;libcurl_imp.lib;pthreadVCE2.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
